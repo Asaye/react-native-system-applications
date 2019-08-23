@@ -68,6 +68,7 @@ You can also use your custom name for the main module without any loss of functi
 >>```import mySystemApp from 'react-native-system-applications';```
 
 <p style = "text-align: justify">For simplicity and modularity reasons, the module is comprised of the following loosely coupled sub-modules. Each submodule is independent of the other, and you just need to call the module which you are interested in via the above imported field.</p>
+
  * [audio](./docs/audio.md)
  * [video](./docs/video.md)
  * [images](./docs/images.md)
@@ -80,6 +81,7 @@ You can also use your custom name for the main module without any loss of functi
  * [wifi](./docs/wifi.md)
  * [brightness](./docs/brightness.md)
  * [alarm](./docs/alarm.md)
+
 
 <p style = "text-align: justify">For instance, if you want to use the <code>wifi</code> module, call it like so:
 
