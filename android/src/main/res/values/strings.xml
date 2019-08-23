@@ -1,0 +1,7 @@
+<resources>    
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="capture">Capture</string>
+    <string name="recording">Audio recording in progress ...</string>
+    <string name="ready">Ready for audio recording.</string>
+</resources>
