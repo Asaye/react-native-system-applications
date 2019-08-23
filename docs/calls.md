@@ -1,44 +1,58 @@
 # Calls
 <p style = "text-align: justify">This module is used to call a specific phone number or to retrieve call log from the device. The module is accessed by calling the calls module via <code>Sysapps.calls</code>.</p> 
+
 ## Functions
 <p style = "text-align: justify">The calls module contains the following functions.</p>
+
 ``` 
     call(String num)
     getLog()
 ```
+
 ### Permissions
 <p style = "text-align: justify">In order to call a number with <code>call()</code>  function, the following permission should be included in the AndroidManifest.xml file.</p>
- 			```<uses-permission android:name="android.permission.CALL_PHONE" />```
+
+```	<uses-permission android:name="android.permission.CALL_PHONE" />```
+
 <p style = "text-align: justify">Besides, to retrieve the call logs from the device with <code>getLog()</code>  function, the following permission should be included in the AndroidManifest.xml file.</p>
- 			```<uses-permission android:name="android.permission.READ_CALL_LOG"/>```
+
+```	<uses-permission android:name="android.permission.READ_CALL_LOG"/>```
 
 ### Description
+
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
+
 #### call(String number): 
 
-> ><p style = "text-align: justify">is used to call a phone number specified by <code>number</code> parameter.</p>
+<p style = "text-align: justify">is used to call a phone number specified by <code>number</code> parameter.</p>
 
->> ##### Sample code snippet
+##### Sample code snippet
+
 ``` 
             _callNumber = async () => {
                 await Sysapps.calls.call("+123456789");
             } 
 ```
->>>><p style = "text-align: justify">Invoking the <code>_callNumber()</code> function makes a call to the arbitrary number passed as a parameter. A promise rejection will be sent for unsuccessful requests.</p>
+
+<p style = "text-align: justify">Invoking the <code>_callNumber()</code> function makes a call to the arbitrary number passed as a parameter. A promise rejection will be sent for unsuccessful requests.</p>
 
 #### getLog(): 
 
-> ><p style = "text-align: justify">is used to retrieve upto 500 call data from the device.</p>
+<p style = "text-align: justify">is used to retrieve upto 500 call data from the device.</p>
 
->> ##### Sample code snippet
+##### Sample code snippet
+
 ``` 
             _getCallLog = async () => {
                 const callData = await Sysapps.calls.getLog();
                 console.log(callData);
             } 
 ```
->>>><p style = "text-align: justify">Invoking the <code>_getCallLog()</code> function retrieves call logs from the device and writes the data on the console. For successfult requests, sample output format is shown below. A promise rejection will be sent if something goes wrong during the retrieval.</p>
->>>>>> ##### Sample output format
+
+<p style = "text-align: justify">Invoking the <code>_getCallLog()</code> function retrieves call logs from the device and writes the data on the console. For successfult requests, sample output format is shown below. A promise rejection will be sent if something goes wrong during the retrieval.</p>
+
+##### Sample output format
+
 ``` 
           [
               {
@@ -61,4 +75,5 @@
               }
           ] 
 ```
->>>><p style = "text-align: justify">Note that the <code>Duration</code> values are the call durations in seconds and <code>Date</code> values are string values of the number of milliseconds between the call time and January 1,1970 00:00:00. It is possible to convert it into human understandable date using the javascript <code>Date</code> object.</p>
+
+<p style = "text-align: justify">Note that the <code>Duration</code> values are the call durations in seconds and <code>Date</code> values are string values of the number of milliseconds between the call time and January 1,1970 00:00:00. It is possible to convert it into human understandable date using the javascript <code>Date</code> object.</p>
