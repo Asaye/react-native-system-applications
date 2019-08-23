@@ -16,7 +16,7 @@
 
 <p style = "text-align: justify">For API levels below 23, no permission is required to use all the functions in this module. In addition, to call <code>indexOf()</code> and <code>indexTo()</code>  functions of the module, no permission is required for all API levels released till date (API level 28). However, for API level 23 and above, users should grant access to Do Not Disturb configuration in order to make a successful calls to the <code>silence()</code>, <code>normalize()</code> and <code>vibrate()</code> functions. As a result, the following permission should be added in the AndroidManifest.xml file outside the application tag.</p>
 
-```     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />  ```
+```     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" /> ```
 
 
 ### Description
