@@ -13,12 +13,10 @@
  
 
 ### Permissions
- <p style = "text-align: justify">To access the current brightness index of the screen with <code>index()</code> function, no permission is required. However, in order to change the bluetooth state of the device with <code>enable()</code> and <code>disable()</code> functions, the following permissions should be included in the AndroidManifest.xml file.</p>
+ <p style = "text-align: justify">To access the current brightness index of the screen with <code>index()</code> function, no permission is required. However, in order to change the brightness of the system with <code>indexTo()function, the following permission should be included in the AndroidManifest.xml file.</p>
  
  ```
-      <uses-permission android:name="android.permission.BLUETOOTH"/>
-      <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-      <uses-feature android:name="android.hardware.bluetooth" />
+      <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 ```
 
 ### Description
@@ -27,6 +25,7 @@
 #### index(): 
 
 <p style = "text-align: justify">is used to get the current brightness index of the screen.</p>
+
  ##### Sample code snippet
  
  ```
@@ -53,4 +52,4 @@
                  await Sysapps.brightness.indexTo(100);
              } 
 ```
-<p style = "text-align: justify">After the  <code>_setBrightnessValue()</code> function is called, the brightness of the screen will be set to <code>0.3</code> for successful requests or a promise rejection will be sent if something goes wrong.</p>
+<p style = "text-align: justify">After the  <code>_setBrightnessValue()</code> function is called, the brightness of the screen will be set to <code>100</code> for successful requests or a promise rejection will be sent if something goes wrong.</p>
