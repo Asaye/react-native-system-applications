@@ -19,17 +19,17 @@
 
 Using npm
 
-	```$ npm install react-native-system-applications --save```
+```	$ npm install react-native-system-applications --save```
 
 Using yarn
 
-	```$ yarn add react-native-system-applications```
+```	$ yarn add react-native-system-applications```
 
 ### Linking
 There are two options for linking:
 ##### 1. Automatic
 
-	```react-native link react-native-system-applications```
+```	react-native link react-native-system-applications```
 ##### 2. Manual
 
 If the automatic linking fails for some reason, you can do the linking manually as follows:
@@ -51,14 +51,14 @@ If the automatic linking fails for some reason, you can do the linking manually 
  ```
  and also,
  ```
- 		@Override
- 		protected List<ReactPackage> getPackages() {
-			return Arrays.<ReactPackage>asList(
-				new MainReactPackage(),
-				....
-				new SysappsPackage()    <== Add this
-			);
-		}
+	@Override
+	protected List<ReactPackage> getPackages() {
+		return Arrays.<ReactPackage>asList(
+			new MainReactPackage(),
+			....
+			new SysappsPackage()    <== Add this
+		);
+	}
  ```
 
 
