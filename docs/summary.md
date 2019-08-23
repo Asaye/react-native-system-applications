@@ -1,5 +1,6 @@
 <h1 style = "color:#4285F4">Summary</h1>
 <p style = "text-align: justify">In order to get the full functionality of this module, the basic steps are summarized below. This summary doesn't cover all the details and I strongly recommend referring to the detailed documentation if extra information is sought regarding the required permissions and configurations. This summary ,however, is useful as a quick reference concerning the capabilities of the module. To use this module, all you have to do is basically as follows:</p>
+
 ### Install
 ``` $ npm install react-native-system-applications --save``` 
 
@@ -15,7 +16,7 @@
 
 ### Implement
 
-<a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./audio.md">Audio</a>
+>> <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./audio.md">Audio</a>
 
 >>> ###### Prepare an audio recording environment so that the output will be saved in music folder. 
 
