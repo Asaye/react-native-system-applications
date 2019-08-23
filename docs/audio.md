@@ -15,9 +15,8 @@
 ### Permissions
 <p style = "text-align: justify">In order to record audio, the following permissions should be included in the AndroidManifest.xml file.</p>
 
-```     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>```
-```     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-```
+```     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.RECORD_AUDIO" />  ```
 
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
