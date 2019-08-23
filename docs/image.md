@@ -14,12 +14,12 @@
 ### Permissions
 
 <p style = "text-align: justify">In order to capture images, the following permissions should be included in the AndroidManifest.xml file.</p>
- >>```
- >><uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
- >><uses-permission android:name="android.permission.CAMERA"/>
- >><uses-feature android:name="android.hardware.camera" android:required="true" />
- >>```
 
+```
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+```
 
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
