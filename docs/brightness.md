@@ -13,7 +13,7 @@
  
 
 ### Permissions
- <p style = "text-align: justify">To access the current brightness index of the screen with <code>index()</code> function, no permission is required. However, in order to change the brightness of the system with <code>indexTo()function, the following permission should be included in the AndroidManifest.xml file.</p>
+ <p style = "text-align: justify">To access the current brightness index of the screen with <code>index()</code> function, no permission is required. However, in order to change the brightness of the system with <code>indexTo()</code> function, the following permission should be included in the AndroidManifest.xml file.</p>
  
  ```
       <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
