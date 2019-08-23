@@ -3,6 +3,7 @@
 
 ## Functions
 <p style = "text-align: justify">The audio module contains the following functions.</p>
+
 ``` 
     prepare(Object options)
     startRecording()
@@ -13,6 +14,7 @@
 
 ### Permissions
 <p style = "text-align: justify">In order to record audio, the following permissions should be included in the AndroidManifest.xml file.</p>
+
 ```     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>```
 ```     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 ```
@@ -49,12 +51,14 @@ All the above properties except the <code>outputFile</code> are optional. If you
 #### startRecording(): 
 
 > ><p style = "text-align: justify">is used to start audio recroding activity. Calling this function is equivalent to pressing the START button. After calling the <code>prepare()</code> function and before calling this one, I recommend to provide a few milli seconds gap to make sure that the recording environment is prepared and ready to record. Once the recording is started, it can be terminated by:</p>
+
 > >>* explicitly calling <code>stopRecording()</code> function.
 > >>* pressing the <code>STOP</code> button which appears on the audio recording view.
 > >>* setting <code>maxDuration</code> property in the arguments passed to <code>prepare()</code> function.
 > >>* setting <code>maxFileSize</code> property in the arguments passed to <code>prepare()</code> function.
 > >>* explicitly calling <code>exitRecording()</code> function.
 > >>* pressing the back button.
+
 > ><p style = "text-align: justify">Note that if the audio recording is terminated by the first four ways, another session of recording can be started again by calling the <code>startRecording()</code> method or by pressing the START button and the loop continues until the recording is terminated by pressing the back button or calling the <code>exitRecording()</code> function.</p>
     
     ##### Sample code snippet
