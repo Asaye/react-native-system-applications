@@ -65,11 +65,11 @@ If the automatic linking fails for some reason, you can do the linking manually 
 ### Usage
 The module is simple to use. Just import the main module, call one of the twelve submodules and invoke the methods. The main module is imported like so:
 
-	```import Sysapps from 'react-native-system-applications';```
+```   import Sysapps from 'react-native-system-applications';```
 
 You can also use your custom name for the main module without any loss of functionality as below:
 
-	```import mySystemApp from 'react-native-system-applications';```
+```   import mySystemApp from 'react-native-system-applications';```
 
 <p style = "text-align: justify">For simplicity and modularity reasons, the module is comprised of the following loosely coupled sub-modules. Each submodule is independent of the other, and you just need to call the module which you are interested in via the above imported field.</p>
 
@@ -89,10 +89,10 @@ You can also use your custom name for the main module without any loss of functi
 
 <p style = "text-align: justify">For instance, if you want to use the <code>wifi</code> module, call it like so:
 
- 	```Sysapps.wifi```
+ ```   Sysapps.wifi    ```
 <p style = "text-align: justify">Then, invoke the methods which the resulting object contains. For instance, to enable wifi on the device, what you have to do is: </p>
 
-	 ```Sysapps.wifi.enable()```
+```    Sysapps.wifi.enable()   ```
 
 <p style = "text-align: justify">The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).</p>
 
