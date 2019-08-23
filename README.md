@@ -75,7 +75,7 @@ You can also use your custom name for the main module without any loss of functi
 
  * [audio](./docs/audio.md)
  * [video](./docs/video.md)
- * [images](./docs/images.md)
+ * [image](./docs/image.md)
  * [contacts](./docs/contacts.md)
  * [calls](./docs/calls.md)
  * [files](./docs/files.md)
