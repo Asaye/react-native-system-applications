@@ -94,7 +94,7 @@ You can also use your custom name for the main module without any loss of functi
 
 ```    Sysapps.wifi.enable()   ```
 
-<p style = "text-align: justify">The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).</p>
+The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
 
 ## Issues or suggestions?
 In some cases, the module might work only for devices with higher API levels. You might have issues if you are working with older API levels. For such and other  issues or if you want to suggest something , you can write it [here](https://github.com/Asaye/react-native-system-applications/issues).
