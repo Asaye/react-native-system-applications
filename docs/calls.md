@@ -49,7 +49,7 @@
             } 
 ```
 
-<p style = "text-align: justify">Invoking the <code>_getCallLog()</code> function retrieves call logs from the device and writes the data on the console. For successfult requests, sample output format is shown below. A promise rejection will be sent if something goes wrong during the retrieval.</p>
+<p style = "text-align: justify">Invoking the <code>_getCallLog()</code> function retrieves call logs from the device and writes the data on the console. For successful requests, sample output format is shown below. A promise rejection will be sent if something goes wrong during the retrieval.</p>
 
 ##### Sample output format
 

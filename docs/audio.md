@@ -34,15 +34,15 @@
 <tr><td>audioEncoder</td><td> false</td><td>"AMR_NB" </td><td>enum( "AMR_NB" , "DEFAULT_EN",  "AAC",  "AAC_ELD" )</td><td style = "text-align: justify">An audio encoder used to process the audio data.</td></tr>
 <tr><td>outputFolder </td><td>true</td><td>-</td><td>String</td><td style = "text-align: justify">The path to the folder where the recorded audio will be saved.</td></tr>
 <tr><td>maxDuration</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum duration (in milliseconds) of the recording.</td></tr>
-<tr><td>maxDuration</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum file size (in bytes) of the recoded file.</td></tr>
+<tr><td>maxFileSize</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum file size (in bytes) of the recoded file.</td></tr>
 </table>
 
-All the above properties except the <code>outputFile</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
+All the above properties except the <code>outputFolder</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
 
 ##### Sample code snippet
 ``` 
         _prepareMediaRecorder = () => {
-        	const params = { "outputFile": "Music/" };
+        	const params = { "outputFolder": "Music/" };
         	Sysapps.audio.prepare(params);
         } 
 ```

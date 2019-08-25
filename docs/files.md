@@ -38,12 +38,14 @@ For API level 23 and below devices, only the first configuration, i.e., adding t
 3. Create a folder named <code>xml</code> inside <code>yourAppName\android\app\src\main\res</code> (if there isn't any) and create a file named <code>provider_paths.xml</code> inside the folder and add the following content in the file. As stated above, the contents of this file can be changed to meet your desired accessible file locations.
 
 ```
-		<?xml version="1.0" encoding="utf-8"?>
-		<paths xmlns:android="http://schemas.android.com/apk/res/android">
-			<root-path name="root" path=""/>
-			<files-path name="internal_files" path="images/"/>
-			<external-path name="external_files" path="docs/"/>
-		</paths>
+		<?xml version='1.0' encoding='utf-8'?>
+        <paths xmlns:android="http://schemas.android.com/apk/res/android">
+            <root-path name="root" path=""/>
+            <files-path name="files" path="/" />
+            <external-files-path name="external_files" path="" />
+            <external-path name="external" path="." />
+            <cache-path name="cache" path="/" />
+        </paths>
 ```
 
 ### Description

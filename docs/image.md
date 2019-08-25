@@ -36,12 +36,12 @@
 <tr><td>cameraType</td><td> false</td><td>"BACK"</td><td>enum( "BACK", "FRONT")</td><td style = "text-align: justify">The type of camera to be used for capturing.</td></tr>
 </table>
 
-All the above properties except the <code>outputFile</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
+All the above properties except the <code>outputFolder</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
 
 ##### Sample code snippet
  ```
         _prepareCaptureEnv = () => {
-        	const params = { "outputFile": "images/", "cameraType": "FRONT" };
+        	const params = { "outputFolder": "images/", "cameraType": "FRONT" };
         	Sysapps.image.prepare(params);
         } 
  ```

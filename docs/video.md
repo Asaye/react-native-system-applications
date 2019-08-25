@@ -38,16 +38,16 @@
 <tr><td>audioEncoder</td><td> false</td><td>"AMR_NB" </td><td>enum( "AMR_NB" , "DEFAULT_EN",  "AAC",  "AAC_ELD" )</td><td style = "text-align: justify">An audio encoder used to process audio data.</td></tr>
 <tr><td>outputFolder </td><td>true</td><td>-</td><td>String</td><td style = "text-align: justify">The path to the folder where the recorded video will be saved.</td></tr>
 <tr><td>maxDuration</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum duration (in milliseconds) of the recording.</td></tr>
-<tr><td>maxDuration</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum file size (in bytes) of the recoded file.</td></tr>
+<tr><td>maxFileSize</td><td> false</td><td>-</td><td>int</td><td style = "text-align: justify">The maximum file size (in bytes) of the recoded file.</td></tr>
 <tr><td>cameraType</td><td> false</td><td>"BACK"</td><td>enum( "BACK", "FRONT")</td><td style = "text-align: justify">The type of camera to be used for the recording.</td></tr>
 </table>
 
-All the above properties except the <code>outputFile</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
+All the above properties except the <code>outputFolder</code> are optional. If you  don't specify them, default values ,as described above, will be assigned to those properties during runtime.
 
 ##### Sample code snippet
  ```
         _prepareRecordingEnv = () => {
-        	const params = { "outputFile": "movies/", "cameraType": "FRONT" };
+        	const params = { "outputFolder": "movies/", "cameraType": "FRONT" };
         	Sysapps.video.prepare(params);
         } 
  ```
@@ -64,7 +64,7 @@ All the above properties except the <code>outputFile</code> are optional. If you
 * explicitly calling <code>exitRecording()</code> function.
 * pressing the back button.
 
-<p style = "text-align: justify">Note that if the audio recording is terminated by the first four ways, another session of recording can be started again by calling the <code>startRecording()</code> method or by pressing the START button and the loop continues until the recording is terminated by pressing the back button or calling the <code>exitRecording()</code> function.</p>
+<p style = "text-align: justify">Note that if the video recording is terminated by the first four ways, another session of recording can be started again by calling the <code>startRecording()</code> method or by pressing the START button and the loop continues until the recording is terminated by pressing the back button or calling the <code>exitRecording()</code> function.</p>
 
 ##### Sample code snippet
 
