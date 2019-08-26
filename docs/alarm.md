@@ -55,7 +55,7 @@ The response data sent via the event emitter is the string representation of the
 <table>
 <tr><th>Prop</th><th>Required</th><th>Default</th><th style =  "width: 150px">Type</th><th>Description</th></tr>
 <tr><td>channelId</td><td>true</td><td>-</td><td>String</td><td style = "text-align: justify">A unique string identifier for the notification and for the channel throught which the notification will be streamed.</td></tr>
-<tr><td>time</td><td>true</td><td>-</td><td> long</td><td style = "text-align: justify">A time gap in milli seconds between January 1, 1970 00:00:00 and the time when the notification is desired to fire.</td></tr>
+<tr><td>date</td><td>true</td><td>-</td><td>long</td><td style = "text-align: justify">The number of milli seconds between the date and time when the notification is desired to be posted and January 1, 1970 00:00:00. The value can easily be obtained by calling <code>getTime()</code> function on a javascript date object. </td></tr>
 <tr><td>title</td><td> false</td><td> -</td><td>String</td><td style = "text-align: justify">The title of the notification.</td></tr>
 <tr><td>content</td><td> false</td><td>-</td><td>String</td><td style = "text-align: justify">The content of the notification.</td></tr>
 </table>
@@ -65,10 +65,11 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
-        _scheduleNotification = () => {        	 
+        _scheduleNotification = () => {
+            const date = new Date(2019, 8, 1, 8, 30, 0); // Sep 01 2019 @ 8:30:00 AM        	 
         	const params = { 
                 "channelId": "abc123", 
-                "time": 60000, 
+                "date": date.getTime(), 
                 "title": "my title", 
                 "content" : "my content", 
                 "key1": "value1", 
@@ -79,7 +80,7 @@ You can also add any other key-value pairs in addition to the above so that you 
         } 
  ```
 
-<p style = "text-align: justify">Invoking the <code>_scheduleNotification()</code> function schedules an alarm to be fired after one minute. When the notification is fired an event will also be emitted and the string representation of the <code>params</code> field defined within the function will be sent back as a response.</code></p>
+<p style = "text-align: justify">Invoking the <code>_scheduleNotification()</code> function schedules an alarm to be fired on Sep 01 2019 @ 8:30:00 AM local time. When the notification is fired an event will also be emitted and the string representation of the <code>params</code> field defined within the function will be sent back as a response.</code></p>
 
 #### update(Object options): 
 
@@ -89,10 +90,11 @@ You can also add any other key-value pairs in addition to the above so that you 
 
 ```
         _updateNotif_abc123 = () => {
-        	Sysapps.alarm.update({ "channelId": "abc123", "time": 120000 });        	
+            const date = new Date(2019, 8, 2, 8, 30, 0); // Sep 02 2019 @ 8:30:00 AM  
+        	Sysapps.alarm.update({ "channelId": "abc123", "date": date.getTime() });        	
         } 
 ```
-<p style = "text-align: justify">Invoking the <code>_updateNotif_abc123()</code> function updates a scheduled notification with <code>channelId</code> of <code>abc123</code> by changing the minimum delay when the notification will be posted to two minutes.</p>
+<p style = "text-align: justify">Invoking the <code>_updateNotif_abc123()</code> function updates a scheduled notification with <code>channelId</code> of <code>abc123</code> by changing the date when the notification will be posted to Sep 02 2019 @ 8:30:00 AM local time.</p>
 
 #### refer(String channelId): 
 
