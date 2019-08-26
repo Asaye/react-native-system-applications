@@ -16,6 +16,7 @@ import android.app.job.JobScheduler;
 import android.app.job.JobInfo;
 import android.content.ComponentName;
 import android.os.PersistableBundle;
+
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -26,8 +27,11 @@ import java.io.File;
 public class Alarm extends ReactContextBaseJavaModule {
 
     private static final String TAG = "ALARM_ERROR";
-   
+
+    
     private JobScheduler mJobScheduler;
+    private PersistableBundle mPersistableBundle;
+    private Promise mAlarmPromise;
 
     public Alarm(ReactApplicationContext reactContext) {
         super(reactContext);  
@@ -38,35 +42,24 @@ public class Alarm extends ReactContextBaseJavaModule {
     public String getName() {
         return "Alarm";
     }
-
+   
     @ReactMethod
     public void schedule(ReadableMap map, Promise promise) {
-        validate(map, promise);
-        String id = map.getString("channelId");
-        long time = (long) map.getDouble("time");        
-               
-        Date now = new Date();
-        Date future = new Date(time);
-        long delay = future.getTime() - now.getTime();
-        PersistableBundle pBundle = updateBundle(new PersistableBundle(), map);
-
-        scheduleJob(pBundle, id, delay);
+        validate(map, promise);        
+        mPersistableBundle = updateBundle(new PersistableBundle(), map);
+        mAlarmPromise = promise;
+        scheduleJob();
     }
 
     @ReactMethod
     public void update(ReadableMap map, Promise promise) {
         validate(map, promise);
         String id = map.getString("channelId");        
-        PersistableBundle pBundle = updateBundle(getJobExtras(id), map);
-
-        cancelJob(id);
-
-        Date now = new Date();
-        Date future = new Date((long) map.getDouble("time"));
-        long delay = future.getTime() - now.getTime();
-        
-        if (pBundle != null) {
-            scheduleJob(pBundle, pBundle.getString("channelId"), delay);   
+        mPersistableBundle = updateBundle(getJobExtras(id, promise), map);
+        cancelJob(id, promise);        
+        if (mPersistableBundle != null) {
+            mAlarmPromise = promise;
+            scheduleJob();   
         } else {
             promise.reject(TAG, "No data with specified channelId could be retrieved");
         }        
@@ -75,7 +68,7 @@ public class Alarm extends ReactContextBaseJavaModule {
     @ReactMethod
     public void cancel(String id, Promise promise) {
         if (id == null) return;
-        cancelJob(id);
+        cancelJob(id, promise);
     }
 
     @ReactMethod
@@ -88,8 +81,8 @@ public class Alarm extends ReactContextBaseJavaModule {
                     file.delete();
                 }
             }
-        }catch (Exception ex) {
-
+        } catch (Exception ex) {
+            promise.reject(TAG, ex.getMessage());
         }
     }
 
@@ -97,7 +90,7 @@ public class Alarm extends ReactContextBaseJavaModule {
     public void refer(String id, Promise promise) { 
         if (id == null) return;      
         try {
-            PersistableBundle pBundle = getJobExtras(id);
+            PersistableBundle pBundle = getJobExtras(id, promise);
             JSONObject json = new JSONObject();
             for (String key: pBundle.keySet()) {
                 if (pBundle.getString(key) != null) {
@@ -123,7 +116,7 @@ public class Alarm extends ReactContextBaseJavaModule {
             promise.reject(TAG, "Request parameter should contain 'id' property.");
         }
         
-        if (map.getDouble("time") <= 0) {
+        if (map.isNull("date")) {
             promise.reject(TAG, "Request parameter should contain 'time' property.");
         }
     }
@@ -148,28 +141,38 @@ public class Alarm extends ReactContextBaseJavaModule {
         }        
 
         return pBundle;
-    }
+    }    
 
-    private void scheduleJob(PersistableBundle pBundle, String id, long delay) {
+    private void scheduleJob() {
+        PersistableBundle pBundle = mPersistableBundle;
+        if (pBundle == null) return;
+
+        String id = pBundle.getString("channelId"); 
         if (id == null) return;
         try {
             Activity activity = getCurrentActivity();
             Context context = getReactApplicationContext();
             int num =(int) (Math.random()*10000000); 
+            long date = (long) pBundle.getDouble("date");        
+           
+            Date now = new Date();            
+            Date future = new Date(date);
+            long delay = future.getTime() - now.getTime();            
             JobInfo.Builder builder = new JobInfo.Builder(num,
                     new ComponentName( activity.getPackageName(), AlarmService.class.getName())); 
             builder.setExtras(pBundle);
             builder.setPersisted(true);
             builder.setMinimumLatency(delay); 
+
             JobInfo jobInfo = builder.build();         
             int jobId = mJobScheduler.schedule(jobInfo);       
             Storage.writeObject(context, id, new Integer(num));
         } catch (Exception ex) {
-
+            mAlarmPromise.reject(TAG, ex.getMessage());
         }
     }
 
-    private void cancelJob(String id) {
+    private void cancelJob(String id, Promise promise) {
         if (id == null) return;
         try {
             Context context = getReactApplicationContext();
@@ -177,11 +180,11 @@ public class Alarm extends ReactContextBaseJavaModule {
             mJobScheduler.cancel(jobId.intValue());
             context.deleteFile(id);
         } catch (Exception ex) {
-
+            promise.reject(TAG, ex.getMessage());
         }
     }
 
-    private PersistableBundle getJobExtras(String id) {
+    private PersistableBundle getJobExtras(String id, Promise promise) {
         if (id == null) {
             return null;
         }
@@ -192,7 +195,7 @@ public class Alarm extends ReactContextBaseJavaModule {
             JobInfo jobInfo = mJobScheduler.getPendingJob(jobId.intValue());
             return jobInfo.getExtras();
         } catch (Exception ex) {
-            
+            promise.reject(TAG, ex.getMessage());
         }
         return null;
     }

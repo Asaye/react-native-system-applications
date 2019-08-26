@@ -1,11 +1,18 @@
 package com.sysapps.alarm;
 
+import com.facebook.react.ReactApplication;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactInstanceManager;
+
 import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.app.NotificationManager;
 import android.app.Notification;
+import android.app.Activity;
 import android.support.v4.app.NotificationCompat;
 import android.R;
 import android.app.job.JobService;
@@ -13,6 +20,8 @@ import android.app.job.JobParameters;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+
+import org.json.JSONObject;
 
 public class AlarmService extends JobService {
 
@@ -22,8 +31,13 @@ public class AlarmService extends JobService {
 	    @Override
 	    public boolean handleMessage( Message msg ) {
 	    	JobParameters params = (JobParameters) msg.obj;
-	        displayNotif(params);
-	        jobFinished(params, false);
+	    	try {
+	    		displayNotif(params);
+	        	emitEvent(params);
+	    	} catch (Exception e) {
+	    	} finally {
+	    		jobFinished(params, false);
+	    	}
 	        return true;
 	    }
 	});
@@ -42,8 +56,7 @@ public class AlarmService extends JobService {
 	    return false;
 	}
 
-	private void displayNotif(JobParameters params) {		      
-		
+	private void displayNotif(JobParameters params) {
       	try {
       		Context context = getApplicationContext();
       		PersistableBundle pBundle = params.getExtras();
@@ -59,10 +72,43 @@ public class AlarmService extends JobService {
 
       		NotificationManager nm =
 					(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-			nm.notify(id, notification);
-			NotificationEvent.emitEvent(pBundle);
+			nm.notify(id, notification);			
 		} catch(Exception ex) {
-      			
       	}
 	}
+
+	public void emitEvent(JobParameters params) {
+		Context context = getApplicationContext();
+		ReactNativeHost host = ((ReactApplication)context).getReactNativeHost();
+		PersistableBundle pBundle = params.getExtras();
+		ReactInstanceManager manager = null;
+		ReactApplicationContext reactContext = null;		
+        String response;
+
+		if (host != null) {
+			manager = host.getReactInstanceManager();
+			reactContext = (ReactApplicationContext) manager.getCurrentReactContext();	
+		}             
+        
+        try {
+            JSONObject json = new JSONObject();
+            for (String key: pBundle.keySet()) {
+                if (pBundle.getString(key) != null) {
+                    json.put(key, pBundle.getString(key)); 
+                } else if (pBundle.get(key) instanceof Double) {
+                    json.put(key, pBundle.getDouble(key)); 
+                } else if (pBundle.get(key) instanceof Boolean) {
+                    json.put(key, pBundle.getBoolean(key)); 
+                }                               
+            } 
+            response = json.toString();
+        } catch (Exception ex){
+            response = ex.getMessage();
+        }
+
+        if (reactContext != null) {
+        	reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("onNotification", response); 
+        }                    
+    }
 }
