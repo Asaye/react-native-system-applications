@@ -178,7 +178,7 @@
 
 >>> ###### Schedule a notification to be posted after one minute. 
 
->>> > ``` Sysapps.alarm.schedule({ "channelId": "abc123", "time": 60000 }); ``` 
+>>> > ``` Sysapps.alarm.schedule({ "channelId": "abc123", "date": (new Date()).getTime() + 60000 }); ``` 
 
 >>> ###### Add title to a scheduled notification having channedId of abc123. 
 
