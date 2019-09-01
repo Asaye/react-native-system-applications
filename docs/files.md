@@ -15,7 +15,7 @@
 
 ### Permissions
 
->> No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration, i.e., adding the storage permission,  is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
+No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration, i.e., adding the storage permission,  is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
 For API level 23 and below devices, only the first configuration is required. For API level 24 and above, all the three configurations are mandatory. The third configuration can be changed according to official android [documentation](https://developer.android.com/reference/android/support/v4/content/FileProvider)  regarding <code>FileProvider</code> class.
 
 1. Add the following permission outside the application tage of the AndroidManifest.xml file.
@@ -53,7 +53,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### open(String path): 
+#### &#x1F539; open(String path): 
 
 <p style = "text-align: justify">is used to open a file from a location specified by the <code>path</code> parameter. A number of common file types will be opened by calling this function via the default app on the device. Note that the device should have an installed app to open the given file type. For instance, if you want to open a pdf file, the file will be opened successfully only if there is a pdf viewer installed on the device.</p>
 
@@ -67,7 +67,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ```
 <p style = "text-align: justify">Call to  <code>_openFile()</code> will open the specified file for successful requests or a promise rejection will be sent if something goes wrong.</p>
 
-#### getPath(): 
+#### &#x1F539; getPath(): 
 
 <p style = "text-align: justify">is used to get a path of a file where a  file picker dialog will be opened and the user picks any file from the device. For successful requests, the path of the selected file will be sent as a response or a promise rejection otherwise. </p>
 
@@ -87,7 +87,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
                 "file:///storage/emulated/0/Download/myfile.mp4"
 ```
 
-#### pick(): 
+#### &#x1F539; pick(): 
 
 <p style = "text-align: justify">is used to open  file picker dialog so that the user can pick and open a file from the device. Note that, for API level 24 and above, in order to successfully open the desired file, the correct configuration should be made to grant access to the desired file location as described above. </p>
 
@@ -102,7 +102,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
 
 <p style = "text-align: justify">Call to  <code>_openFileFromPicker()</code> function opens a file picker dialog, waits for a user to select a file and opens the file if access is rightfully granted.</p>
 
-#### download(String src, String dest): 
+#### &#x1F539; download(String src, String dest): 
 
 <p style = "text-align: justify">is used to download file from <code>src</code> to <code>dest</code>. The <code>src</code> parameter can be either a file location on the device or a webservice. If it is the former one, the actual file location should be preceded by a protocol, i.e., <code>file://</code>. The <code>dest</code> parameter can be either a presumed complete file path or a directory where the downloaded file will be stored. You use the former one if you know the file mime type before downloading and you want to give your own custom name to the file. Where as the latter is used if you want the downloaded file to take the same name as it has in the source location.</p>
 
@@ -118,7 +118,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
 
 <p style = "text-align: justify">Call to  <code>_downloadFile()</code> function downloads a file from the webservice specified by <code>src</code> variable and saves it in a directory specified by <code>dest</code> variable.</p>
 
-#### upload(String dest): 
+#### &#x1F539; upload(String dest): 
 
 <p style = "text-align: justify">is used to upload a file picked from the device on to a webservice specified by <code>dest</code> parameter. Note that, for API level 24 and above, in order to successfully upload the desired file, the correct configuration should be made to grant access to the desired file location as described above. </p>
 
