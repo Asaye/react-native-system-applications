@@ -15,7 +15,7 @@
 
 ### Permissions
 
-No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration, i.e., adding the storage permission,  is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
+>> No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration, i.e., adding the storage permission,  is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
 For API level 23 and below devices, only the first configuration is required. For API level 24 and above, all the three configurations are mandatory. The third configuration can be changed according to official android [documentation](https://developer.android.com/reference/android/support/v4/content/FileProvider)  regarding <code>FileProvider</code> class.
 
 1. Add the following permission outside the application tage of the AndroidManifest.xml file.
