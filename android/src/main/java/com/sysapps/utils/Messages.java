@@ -12,6 +12,11 @@ public class Messages  {
 	public static final String BRIGHTNESS_INVALID_INDEX = 
 					"Brightness index should be between 0 and 255 inclusive.";
 
+	public static final String FILE_INACCESSIBLE = 
+					"No valid file is selected. Please check whether the the required permission is granted" +
+                                    "for the selected file.";
+    public static final String PICKER_CANCELLED = "User has cancelled the file picker";
+
     	 
 }
 
