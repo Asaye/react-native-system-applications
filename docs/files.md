@@ -9,6 +9,8 @@
     open(String path)
     getPath()
     pick()
+    download(String src, String dest)
+    upload(String dest)
 ```
 
 ### Permissions
@@ -84,6 +86,38 @@ For API level 23 and below devices, only the first configuration, i.e., adding t
 ```
                 "file:///storage/emulated/0/Download/myfile.mp4"
 ```
+
+#### download(String src, String dest): 
+
+<p style = "text-align: justify">is used to download file from <code>src</code> to <code>dest</code>. The <code>src</code> parameter can be either a file location on the device or a webservice. If it is the former one, the actual file location should be preceded by a protocol, i.e., <code>file://</code>. The <code>dest</code> parameter can be either a presumed complete file path or a directory where the downloaded file will be stored. You use the former one if you know the file mime type before downloading and you want to give your own custom name to the file. Where as the latter is used if you want the downloaded file to take the same name as it has in the source location.</p>
+
+##### Sample code snippet
+
+``` 
+            _downloadFile = async () => {
+	    	const src = "http://www.mywebservice.com/download/myVideo.mp4",
+		      dest = "/storage/emulated/0/videos/";
+                await Sysapps.files.download(src, dest);
+            } 
+```
+
+##### Sample result 
+<p style = "text-align: justify">Call to  <code>_openFileFromPicker()</code> function opens a file picker dialog, waits for a user to select a file and opens the file if access is rightfully granted.</p>
+
+#### pick(): 
+
+<p style = "text-align: justify">is used to open  file picker dialog so that the user can pick and open a file from the device. Note that, for API level 24 and above, in order to successfully open the desired file, the correct configuration should be made to grant access to the desired file location as described above. </p>
+
+##### Sample code snippet
+
+``` 
+            _openFileFromPicker = async () => {
+                await Sysapps.files.pick();
+            } 
+```
+
+##### Sample result 
+<p style = "text-align: justify">Call to  <code>_openFileFromPicker()</code> function opens a file picker dialog, waits for a user to select a file and opens the file if access is rightfully granted.</p>
 
 #### pick(): 
 
