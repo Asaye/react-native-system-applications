@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
@@ -24,45 +25,62 @@ import android.Manifest;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Process;
+import android.os.Handler;
+import android.os.HandlerThread;
 
 import java.lang.Exception;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.io.File;
 
 public class Files extends ReactContextBaseJavaModule 
             implements PermissionListener {
 
     private static final String TAG = "FILE_OPEN_ERROR";
-    private static final int PERMISSIONS_REQUEST_CODE = 10050;
-    private static final int FILE_PICK_REQUEST = 10051;
-    private static final int FILE_OPEN_REQUEST = 10052;
+    private static final int FILE_PICK_REQUEST = 10050;
+    private static final int FILE_OPEN_REQUEST = 10051;
+    private static final int FILE_TRANSFER_REQUEST = 10052;
+    private static final int FILE_UPLOAD_REQUEST = 10053;
+    private static final int PERMISSIONS_REQUEST_OPEN = 10054;
+    private static final int PERMISSIONS_REQUEST_PICK = 10055;
+    private static final int PERMISSIONS_REQUEST_DOWNLOAD = 10056;
+    private static final int PERMISSIONS_REQUEST_UPLOAD = 10057;
+    
 
     private static final String[] PERMISSIONS = 
                         new String[] {   
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
                         };
-    private boolean mIsPermissionGranted = false;    
-
+    
     private Promise mFilePickPromise;
     private Promise mFileOpenPromise;
+    private Promise mFileTransferPromise;
+    private Promise mFileUploadPromise;
+    private Uri mFileUri;
     private String mUrl;
+    private String mSource;
+    private String mDestination;
 
     private final ActivityEventListener filesEventListener = new BaseActivityEventListener() {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent intent) {
 
             if (mFilePickPromise != null && requestCode == FILE_PICK_REQUEST) {
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK) {                    
                     Uri uri = intent.getData();
+
                     if (uri == null) {
                         mFilePickPromise.reject(TAG, "No file data found");
                     } else {
-                        mFilePickPromise.resolve(uri.toString());
+                        String path = URLDecoder.decode(uri.toString());
+                        mFilePickPromise.resolve(path);
                     }
                 } else if (resultCode == Activity.RESULT_CANCELED) {
-                    mFilePickPromise.reject(TAG, "User has cancelled the file picker");
+                    mFilePickPromise.reject(TAG, Messages.PICKER_CANCELLED);
                 }
                 mFilePickPromise = null;
             } else if (mFileOpenPromise != null && requestCode == FILE_OPEN_REQUEST) {
+
                 if (resultCode == Activity.RESULT_OK) {
                     Uri uri = intent.getData();
                     if (uri != null) {
@@ -70,16 +88,75 @@ public class Files extends ReactContextBaseJavaModule
                         getUri();
                     }                    
                 } else if (resultCode == Activity.RESULT_CANCELED) {
-                    mFileOpenPromise.reject(TAG, "User has cancelled the file picker");
+                    mFileOpenPromise.reject(TAG, Messages.PICKER_CANCELLED);
                 }
                 mFileOpenPromise = null;
+            } else if (requestCode == FILE_UPLOAD_REQUEST) {
+
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri uri = intent.getData();
+
+                    if (uri != null) {
+                        String path = uri.getPath();
+                        File file = new File(path);
+
+                        if (!file.isFile() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            try {
+                                Context context = getReactApplicationContext();
+                                String packageName = context.getPackageName();
+                                Uri fpUri = FileProvider.getUriForFile(getCurrentActivity(), packageName, file);
+                                context.grantUriPermission(packageName, fpUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                path = URLDecoder.decode(fpUri.toString()); 
+                                file = new File(path);
+                                if (!file.isFile()) {
+                                    mFileUploadPromise.reject(TAG, Messages.FILE_INACCESSIBLE);
+                                }
+                            } catch (Exception ex) {
+                                mFileUploadPromise.reject(TAG, ex.getMessage());
+                            }
+                        }                        
+                        HandlerThread thread = new HandlerThread("FileUpload");
+                        thread.start();
+                        Handler handler = new Handler(thread.getLooper());     
+                        handler.post(new Uploader(file, mDestination, mFileUploadPromise));
+                    }                  
+                } else if (mFileUploadPromise != null && resultCode == Activity.RESULT_CANCELED) {
+                    mFileUploadPromise.reject(TAG, "User has cancelled the file picker");
+                }
+                mFileUploadPromise = null;
+            } else if (mFileTransferPromise != null && requestCode == FILE_TRANSFER_REQUEST) {
+
+                if (resultCode == Activity.RESULT_OK) {
+                    downloadFile();                   
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    mFileTransferPromise.reject(TAG, Messages.PERMISSION_DENIED);
+                }
+                mFileTransferPromise = null;
             } 
+        }
+    };
+
+    private LifecycleEventListener lifeEventListener = new LifecycleEventListener() {
+        public void onHostResume() { 
+        }
+
+        public void onHostPause() { 
+        }
+
+        public void onHostDestroy() { 
+            if (mFileUri == null) return;
+            Context context = getReactApplicationContext();
+            if (context == null) return;
+            String packageName = context.getPackageName();
+            context.grantUriPermission(packageName, mFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION 
+                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         }
     };
     
     public Files(ReactApplicationContext reactContext) {
         super(reactContext);
         reactContext.addActivityEventListener(filesEventListener);
+        reactContext.addLifecycleEventListener(lifeEventListener);
     }
 
     @Override
@@ -90,10 +167,16 @@ public class Files extends ReactContextBaseJavaModule
     @Override
     public boolean onRequestPermissionsResult(
         int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_CODE && 
-            grantResults.length == PERMISSIONS.length) {
-            mIsPermissionGranted = true;
-            getUri();
+        if (grantResults.length == PERMISSIONS.length) {
+            if (requestCode == PERMISSIONS_REQUEST_OPEN) {
+                getUri();
+            } else if (requestCode == PERMISSIONS_REQUEST_PICK) {
+                openDialog(FILE_OPEN_REQUEST);
+            } else if (requestCode == PERMISSIONS_REQUEST_DOWNLOAD) {
+                downloadFile();
+            } else if (requestCode == PERMISSIONS_REQUEST_UPLOAD) {
+                openDialog(FILE_UPLOAD_REQUEST);
+            }            
         } else {
             mFileOpenPromise.reject(TAG, Messages.PERMISSION_DENIED);
         }
@@ -104,49 +187,72 @@ public class Files extends ReactContextBaseJavaModule
     public void open(String url, Promise promise) {
         mUrl = url;
         mFileOpenPromise = promise;
-        checkPermission("open");
+        if (checkPermission()) {
+            getUri();
+        } else {
+            requestPermissions(PERMISSIONS_REQUEST_OPEN); 
+        }
     }
 
     @ReactMethod
     public void pick(Promise promise) {  
         mFileOpenPromise = promise;
-        checkPermission("pick");
+        if (checkPermission()) {
+            openDialog(FILE_OPEN_REQUEST);
+        } else {
+            requestPermissions(PERMISSIONS_REQUEST_PICK); 
+        }            
     }
 
     @ReactMethod
     public void getPath(Promise promise) {
-        
-        Activity activity = getCurrentActivity();
-
-        assert activity != null;
         mFilePickPromise = promise;
         openDialog(FILE_PICK_REQUEST);        
-    }    
+    }
 
-    private void checkPermission(String type) {        
+    @ReactMethod
+    public void download(String src, String dest, Promise promise) { 
+        mSource = src;
+        mDestination = dest; 
+        mFileTransferPromise = promise;
+        if (checkPermission()) {
+            downloadFile();
+        } else {
+            requestPermissions(PERMISSIONS_REQUEST_DOWNLOAD); 
+        }
+    } 
+
+    @ReactMethod
+    public void upload(String dest, Promise promise) {
+        mDestination = dest; 
+        mFileUploadPromise = promise;
+        if (checkPermission()) {
+            openDialog(FILE_UPLOAD_REQUEST);
+        } else {
+            requestPermissions(PERMISSIONS_REQUEST_UPLOAD); 
+        }        
+    }   
+
+    private boolean checkPermission() {        
         int pid = Process.myPid();
-        int uid = Process.myPid();
-        int status_ok = PackageManager.PERMISSION_GRANTED;
-        Activity activity = getCurrentActivity();
-        
-        assert activity != null;
+        int uid = Process.myUid();
+        int status_ok = PackageManager.PERMISSION_GRANTED;        
         Context context = getReactApplicationContext().getBaseContext();
 
-        mIsPermissionGranted = true;
         for (String permission : PERMISSIONS) {
             if (context.checkPermission(permission, pid, uid) != status_ok) {
-                mIsPermissionGranted = false;
-                ((PermissionAwareActivity) activity)
-                        .requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE, this);
-                break;
+                return false;
             }
         }
 
-        if (mIsPermissionGranted && type.equals("open")) {
-            getUri();
-        } else if (mIsPermissionGranted && type.equals("pick")) {            
-            openDialog(FILE_OPEN_REQUEST);
-        }       
+        return true;   
+    }
+
+    private void requestPermissions(int requestCode) {
+        Activity activity = getCurrentActivity();
+        if (activity == null) return;
+        ((PermissionAwareActivity) activity)
+                        .requestPermissions(PERMISSIONS,requestCode, this); 
     }
 
     private void openDialog(int requestCode) {
@@ -156,24 +262,12 @@ public class Files extends ReactContextBaseJavaModule
     }
 
     private void getUri() {
-        Activity activity = getCurrentActivity();
-
-        assert activity != null;
-
-        try {            
+        try {  
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                File file = new File(mUrl);
-                Context context = getReactApplicationContext();
-                Uri uri = FileProvider.getUriForFile(activity, context.getPackageName(), file); 
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                openFile(uri, intent);
-            } else {                
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                File file = new File(mUrl);
-                Uri uri = Uri.fromFile(file);
-                openFile(uri, intent);
+                openProvidedFile();                
+            } else { 
+                openFile();
             }
             
         } catch (Exception ex) {
@@ -183,11 +277,48 @@ public class Files extends ReactContextBaseJavaModule
         }
     }
 
-    private void openFile(Uri uri, Intent intent) {
+    private void downloadFile() {
+        HandlerThread thread = new HandlerThread("FileDownload");
+        thread.start();
+        Handler handler = new Handler(thread.getLooper());                        
+        handler.post(new Downloader(mSource, mDestination, mFileTransferPromise));
+    }
+    
+    private void openProvidedFile() {
+        Activity activity = getCurrentActivity();
+        if (activity == null) return;
 
-        String url = uri.toString();
+        PackageManager pm = activity.getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        File file = new File(mUrl);
+        Context context = getReactApplicationContext();
+        String packageName = context.getPackageName();
+        mFileUri = FileProvider.getUriForFile(activity, packageName, file); 
+        String mimeType = null;
+
+        context.grantUriPermission(packageName, mFileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | 
+                                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | 
+                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        mimeType = context.getContentResolver().getType(mFileUri);
+        intent.setDataAndType(mFileUri, mimeType);
+        
+        if (intent.resolveActivity(pm) != null) {
+            activity.startActivity(intent);
+        }
+    }
+
+    private void openFile() {
+
         Activity activity = getCurrentActivity();
 
+        if (activity == null) return;
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        File file = new File(mUrl);
+        Uri uri = Uri.fromFile(file);
+        String url = uri.toString();
+                
         if (url.toString().contains(".doc") || url.toString().contains(".docx")) {
             intent.setDataAndType(uri, "application/msword");
         } else if(url.toString().contains(".pdf")) {
