@@ -15,8 +15,8 @@
 
 ### Permissions
 
-No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
-For API level 23 and below devices, only the first configuration, i.e., adding the storage permission, is required. For API level 24 and above, all the three configurations are mandatory. The third configuration can be changed according to official android [documentation](https://developer.android.com/reference/android/support/v4/content/FileProvider)  regarding <code>FileProvider</code> class.
+No permission is required open a file picker dialog with <code>getPath()</code> function and to obtain the path of the selected file as a response. However, to download a file and to save it on the device with <code>download()</code> function, only the first configuration, i.e., adding the storage permission,  is required. In addition, to open a file for a given path from the device with <code>open()</code> function or to pick a file from a dialog and to open it via <code>pick()</code> function, the following  configurations should be made.
+For API level 23 and below devices, only the first configuration is required. For API level 24 and above, all the three configurations are mandatory. The third configuration can be changed according to official android [documentation](https://developer.android.com/reference/android/support/v4/content/FileProvider)  regarding <code>FileProvider</code> class.
 
 1. Add the following permission outside the application tage of the AndroidManifest.xml file.
 
@@ -65,7 +65,7 @@ For API level 23 and below devices, only the first configuration, i.e., adding t
                 await Sysapps.files.open(path);
             } 
 ```
->>>><p style = "text-align: justify">Call to  <code>_openFile()</code> will open the specified file for successful requests or a promise rejection will be sent if something goes wrong.</p>
+<p style = "text-align: justify">Call to  <code>_openFile()</code> will open the specified file for successful requests or a promise rejection will be sent if something goes wrong.</p>
 
 #### getPath(): 
 
@@ -99,9 +99,8 @@ For API level 23 and below devices, only the first configuration, i.e., adding t
             } 
 ```
 
-##### Sample result 
-<p style = "text-align: justify">Call to  <code>_openFileFromPicker()</code> function opens a file picker dialog, waits for a user to select a file and opens the file if access is rightfully granted.</p>
 
+<p style = "text-align: justify">Call to  <code>_openFileFromPicker()</code> function opens a file picker dialog, waits for a user to select a file and opens the file if access is rightfully granted.</p>
 
 #### download(String src, String dest): 
 
@@ -121,7 +120,7 @@ For API level 23 and below devices, only the first configuration, i.e., adding t
 
 #### upload(String dest): 
 
-<p style = "text-align: justify">is used to upload a file picked from the device on to a webservice destination specified by <code>dest</code> parameter. Note that, for API level 24 and above, in order to successfully upload the desired file, the correct configuration should be made to grant access to the desired file location as described above. </p>
+<p style = "text-align: justify">is used to upload a file picked from the device on to a webservice specified by <code>dest</code> parameter. Note that, for API level 24 and above, in order to successfully upload the desired file, the correct configuration should be made to grant access to the desired file location as described above. </p>
 
 ##### Sample code snippet
 
