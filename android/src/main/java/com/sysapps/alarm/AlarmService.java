@@ -1,12 +1,17 @@
 package com.sysapps.alarm;
 
+import com.sysapps.utils.AppState;
+
 import com.facebook.react.ReactApplication;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.HeadlessJsTaskService;
+import com.facebook.react.bridge.Arguments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -20,7 +25,7 @@ import android.app.job.JobParameters;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
-
+import android.os.Bundle;
 import org.json.JSONObject;
 
 public class AlarmService extends JobService {
@@ -30,10 +35,22 @@ public class AlarmService extends JobService {
 	private Handler mJobHandler = new Handler( new Handler.Callback() {
 	    @Override
 	    public boolean handleMessage( Message msg ) {
-	    	JobParameters params = (JobParameters) msg.obj;
+	    	JobParameters params = (JobParameters) msg.obj;    	
+
 	    	try {
 	    		displayNotif(params);
-	        	emitEvent(params);
+	    		Context context = getApplicationContext();
+	    		if (AppState.isAppInForeground(context)) {
+	      			emitEvent(params);
+	    		} else {				   
+			       Intent serviceIntent = new Intent(
+			          context,
+			          EventEmitter.class
+			       );
+			       serviceIntent.putExtra("response", new Bundle(params.getExtras()));      
+	      		   context.startService(serviceIntent);
+	      		   HeadlessJsTaskService.acquireWakeLockNow(context);
+	    		}
 	    	} catch (Exception e) {
 	    	} finally {
 	    		jobFinished(params, false);
@@ -90,25 +107,26 @@ public class AlarmService extends JobService {
 			reactContext = (ReactApplicationContext) manager.getCurrentReactContext();	
 		}             
         
-        try {
-            JSONObject json = new JSONObject();
-            for (String key: pBundle.keySet()) {
-                if (pBundle.getString(key) != null) {
-                    json.put(key, pBundle.getString(key)); 
-                } else if (pBundle.get(key) instanceof Double) {
-                    json.put(key, pBundle.getDouble(key)); 
-                } else if (pBundle.get(key) instanceof Boolean) {
-                    json.put(key, pBundle.getBoolean(key)); 
-                }                               
-            } 
-            response = json.toString();
-        } catch (Exception ex){
-            response = ex.getMessage();
-        }
-
+        // try {
+        //     JSONObject json = new JSONObject();
+        //     for (String key: pBundle.keySet()) {
+        //         if (pBundle.getString(key) != null) {
+        //             json.put(key, pBundle.getString(key)); 
+        //         } else if (pBundle.get(key) instanceof Double) {
+        //             json.put(key, pBundle.getDouble(key)); 
+        //         } else if (pBundle.get(key) instanceof Boolean) {
+        //             json.put(key, pBundle.getBoolean(key)); 
+        //         }                               
+        //     } 
+        //     response = json.toString();
+        // } catch (Exception ex){
+        //     response = ex.getMessage();
+        // }
+        Bundle bundle = new Bundle(pBundle);
+        //Arguments.makeNativeMap(bundle)
         if (reactContext != null) {
         	reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("onNotification", response); 
+                .emit("onNotification", Arguments.makeNativeMap(bundle)); 
         }                    
     }
 }
