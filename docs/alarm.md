@@ -13,7 +13,7 @@
 ```
 
 ## Events
-<p style = "text-align: justify">An event is emitted when the notification is firing. If you want to handle the event, you have to add <code>onNotification</code> listener to your app. One way to do this is as follows: </p>
+<p style = "text-align: justify">An event is emitted when the notification is firing whether the app in the foreground or background. If you want to handle the event while the app is in the foreground, you have to add <code>onNotification</code> listener to your app. One way to do this is as follows: </p>
 
 ``` 
 	import { DeviceEventEmitter } from "react-native";
@@ -26,8 +26,17 @@
   	}
 ```
 
+If you want to handle the event while the app is in the background, you have to add the following at the bottom of your javascript file. You should also register the <code>EventEmitter</code> service in your AndroidManifest.xml file as described in the <a href="#eventEmitter">Permissions</a> section.</p>
+
+``` 
+    import { AppRegistry } from "react-native";
+
+    AppRegistry.registerHeadlessTask('SysappsEventNotification', () => async (e) => {
+        console.log(taskData);
+    });
+```
+
 The response data sent via the event emitter is the string representation of the original object parameter passed to the <code>schedule()</code> function. Note that, only primitive data will be persisted and sent back as a response. 
-<p style = "text-align: justify;">The notification will be posted even after reboot. However, after reboot, the event will be emitted if the implementing app is in the foreground.</p>  
  
 ### Permissions
 <p style = "text-align: justify">In order to schedule and manage notifications, the following service should be added inside <code>application</code> tag of your AndroidManifest.xml file.</p>
@@ -35,6 +44,12 @@ The response data sent via the event emitter is the string representation of the
 ```
 	<service android:name="com.sysapps.alarm.AlarmService"
     		android:permission="android.permission.BIND_JOB_SERVICE" />
+```
+
+<p id = "eventEmitter">To handle events when the app in the background, the following service should be registered in the AndroidManifest.xml file:</p>
+
+ ```
+    <service android:name="com.sysapps.alarm.EventEmitter"/>
 ```
 
 <p style = "text-align: justify">Besides, add the following permissions outside the <code>application</code> tag of the AndroidManifest.xml file.</p>
