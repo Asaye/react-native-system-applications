@@ -3,13 +3,14 @@
 <p style = "text-align: justify">This is a simple multi-purpose react-native module which is designed to perform various activities on android phones. The following tasks can be performed with the help of this module.</p>
 
 * Record audio and video
-* Take multiple instantaneous pictures
-* Call a number or get call logs from a device
+* Take mpictures
+* Call a number
 * Send SMS
-* Get a user picked contact or all contacts from a device
-* Schedule an alarm notification and get notified.
-* Open files through a file picker and url or obtain a given file's path
-* Access and control the device's volume, ringer modes, wifi, bluetooth and brightness.
+* Get or print call logs
+* Get or print contacts
+* Schedule an alarm notification.
+* Download , upload or open files
+* Control device settings.
 
 <p style = "text-align: justify">All these tasks can be performed by importing just one field from the module. However, one may not be interested in performing all these tasks and the module is designed keeping this in mind. As a result, the module is comprised of twelve loosely coupled sub-modules. This, to the least, reduces the number of required permissions which would be added if the sub-modules weren't loosely coupled. You just need to call the sub-module you are intersted in and add only the required permssions (if any) by that sub-module and you can achieve the intended task.</p>
 
