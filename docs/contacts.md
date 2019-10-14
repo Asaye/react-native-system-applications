@@ -7,10 +7,11 @@
 ``` 
     pick()
     getAll()
+    print()
 ```
 
 ### Permissions
-<p style = "text-align: justify">In order to prompt the user to pick a contact with <code>pick()</code>  function and to retrieve list of all contacts with <code>getAll()</code> function, the following permission should be included in the AndroidManifest.xml file.</p>
+<p style = "text-align: justify">In order to prompt the user to pick a contact with <code>pick()</code>  function and to retrieve list of all contacts with <code>getAll()</code> function or to print them with <code>print()</code> function, the following permission should be included in the AndroidManifest.xml file.</p>
 
  ```    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>```
 
@@ -64,3 +65,17 @@
           	{ "Name": "Mrs. Z", "Number": "+1234567891"},
           ]
 ```
+
+#### print(): 
+
+<p style = "text-align: justify">is used to print all contacts from the device in pdf format. The user gets the location of the saved document from an alert notification. </p>
+
+##### Sample code snippet
+
+``` 
+            _printContacts = async () => {
+                await Sysapps.contacts.print();
+            } 
+```
+
+<p style = "text-align: justify">Invoking the <code>_printContacts()</code> function prints all contacts from the device and saves it in pdf format.</p>
