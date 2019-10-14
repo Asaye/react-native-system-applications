@@ -7,6 +7,7 @@
 ``` 
     call(String num)
     getLog()
+    print()
 ```
 
 ### Permissions
@@ -14,7 +15,7 @@
 
 ```	<uses-permission android:name="android.permission.CALL_PHONE" />```
 
-<p style = "text-align: justify">Besides, to retrieve the call logs from the device with <code>getLog()</code>  function, the following permission should be included in the AndroidManifest.xml file.</p>
+<p style = "text-align: justify">Besides, to retrieve the call logs from the device with <code>getLog()</code>  function or to print call logs using <code>print()</code> function, the following permission should be included in the AndroidManifest.xml file.</p>
 
 ```	<uses-permission android:name="android.permission.READ_CALL_LOG"/>```
 
@@ -77,3 +78,17 @@
 ```
 
 <p style = "text-align: justify">Note that the <code>Duration</code> values are the call durations in seconds and <code>Date</code> values are string values of the number of milliseconds between the call time and January 1,1970 00:00:00. It is possible to convert it into human understandable date using the javascript <code>Date</code> object.</p>
+
+#### print(): 
+
+<p style = "text-align: justify">is used to print upto 500 call data from the device in pdf format. The user gets the location of the saved document from an alert notification. </p>
+
+##### Sample code snippet
+
+``` 
+            _printCallLog = async () => {
+                await Sysapps.calls.print();
+            } 
+```
+
+<p style = "text-align: justify">Invoking the <code>_printCallLog()</code> function prints call logs from the device and saves it in pdf format.</p>
