@@ -27,20 +27,26 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 public class PhoneContacts extends ReactContextBaseJavaModule 
             implements PermissionListener {
 
     private static final String TAG = "READ_CONTACTS_ERROR";
-    private static final int PERMISSIONS_REQUEST_CODE = 10040; 
-    private static final int REQUEST_READ_CONTACTS = 10041;
+    private static final int PERMISSIONS_REQUEST_READ = 10040; 
+    private static final int PERMISSIONS_REQUEST_PRINT = 10041; 
+    private static final int REQUEST_READ_CONTACTS = 10042;
 
-    private static final String[] PERMISSIONS = 
+    private static final String[] PERMISSIONS_READ = 
                         new String[] {   
                             Manifest.permission.READ_CONTACTS,
                         };
 
-    private boolean mIsPermissionGranted = false;
+    private static final String[] PERMISSIONS_PRINT = 
+                        new String[] {   
+                            Manifest.permission.READ_CONTACTS
+                        };
 
     private Promise mContactsPromise;
     private String mType;
@@ -78,14 +84,16 @@ public class PhoneContacts extends ReactContextBaseJavaModule
     @Override
     public boolean onRequestPermissionsResult(
         int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_CODE && 
-            grantResults.length == PERMISSIONS.length) {
-            mIsPermissionGranted = true;
+        if (requestCode == PERMISSIONS_REQUEST_READ && 
+            grantResults.length == PERMISSIONS_READ.length) {
             if (mType.equals("picker")) {
                 pickContacts();
             } else if (mType.equals("all")) {
                 getContacts();
             }
+        } else if (requestCode == PERMISSIONS_REQUEST_PRINT && 
+            grantResults.length == PERMISSIONS_PRINT.length) {
+            printContacts();
         } else {
             mContactsPromise.reject(TAG, "User canceled permission request."); 
         }
@@ -99,10 +107,11 @@ public class PhoneContacts extends ReactContextBaseJavaModule
         assert activity != null;
         mType = "picker";
         mContactsPromise = promise;
-        try {
-            checkPermission();         
-        } catch(Exception ex) {
-            promise.reject(TAG, ex.getMessage());
+
+        if (checkPermission(PERMISSIONS_READ)) {
+            pickContacts();
+        } else {
+            requestPermissions(PERMISSIONS_READ, PERMISSIONS_REQUEST_READ);
         }
     }
 
@@ -113,36 +122,47 @@ public class PhoneContacts extends ReactContextBaseJavaModule
         assert activity != null;
         mType = "all";        
         mContactsPromise = promise; 
-        try { 
-            checkPermission();            
-        } catch(Exception ex) {
-            promise.reject(TAG, ex.getMessage());
+
+        if (checkPermission(PERMISSIONS_READ)) {
+            getContacts();
+        } else {
+            requestPermissions(PERMISSIONS_READ, PERMISSIONS_REQUEST_READ);
         }
     }
 
-    private void checkPermission() {        
-        int pid = Process.myPid();
-        int uid = Process.myPid();
-        int status_ok = PackageManager.PERMISSION_GRANTED;
-        Activity activity = getCurrentActivity();
-        Context context = getReactApplicationContext().getBaseContext();
+    @ReactMethod
+    public void print(Promise promise) {
+        if (checkPermission(PERMISSIONS_PRINT)) {
+            printContacts();
+        } else {
+            requestPermissions(PERMISSIONS_PRINT, PERMISSIONS_REQUEST_PRINT);
+        }        
+    }
 
-        mIsPermissionGranted = true;
-        for (String permission : PERMISSIONS) {
+    private boolean checkPermission(String[] permissions) {        
+        int pid = Process.myPid();
+        int uid = Process.myUid();
+        int status_ok = PackageManager.PERMISSION_GRANTED;    
+
+        Context context = getReactApplicationContext().getBaseContext();
+        
+        for (String permission : permissions) {
             if (context.checkPermission(permission, pid, uid) != status_ok) {
-                mIsPermissionGranted = false;
-                ((PermissionAwareActivity) activity)
-                        .requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE, this);
-                break;
+                return false;
             }
         }
 
-        if (mIsPermissionGranted && mType.equals("picker")) {
-            pickContacts();
-        } else if (mIsPermissionGranted && mType.equals("all")) {
-            getContacts();
-        }        
+        return true;               
     }
+
+    private void requestPermissions(String[] permissions, int requestCode) {
+        Activity activity = getCurrentActivity();
+        if (activity == null) return;
+
+        ((PermissionAwareActivity) activity)
+                        .requestPermissions(permissions, requestCode, this);
+    }
+
     private void pickContacts() {
         Activity activity = getCurrentActivity();
 
@@ -190,5 +210,20 @@ public class PhoneContacts extends ReactContextBaseJavaModule
             cursor.close();
         }
         mContactsPromise = null;
+    }
+
+    private void printContacts() {
+        Activity activity = getCurrentActivity();
+        Context context = getReactApplicationContext();
+
+        assert activity == null;          
+
+        FragmentManager mFragmentManager = activity.getFragmentManager();
+        ContactsFragment fragment = ContactsFragment.newInstance(context, activity);                  
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+ 
+        transaction.replace(android.R.id.content, fragment);
+        transaction.addToBackStack(null);
+        transaction.commitAllowingStateLoss();
     }
 }
