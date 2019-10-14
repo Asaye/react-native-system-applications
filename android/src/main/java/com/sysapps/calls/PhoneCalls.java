@@ -15,7 +15,6 @@ import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 
 import android.content.Intent;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.content.Context;
 import android.Manifest;
@@ -23,6 +22,9 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.net.Uri;
 import android.os.Process;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 public class PhoneCalls extends ReactContextBaseJavaModule 
             implements PermissionListener {
@@ -30,6 +32,7 @@ public class PhoneCalls extends ReactContextBaseJavaModule
     private static final String TAG = "CALLS_ERROR";
     private static final int PERMISSION_CALL_PHONE = 10030;
     private static final int PERMISSION_CALL_LOG = 10031;
+    private static final int PERMISSION_CALL_PRINT = 10032;
 
     private static final String[] PERMISSIONS_PHONE = 
                         new String[] {   
@@ -41,7 +44,10 @@ public class PhoneCalls extends ReactContextBaseJavaModule
                             Manifest.permission.READ_CALL_LOG
                         };
 
-    private boolean mIsPermissionGranted = false;
+    private static final String[] PERMISSIONS_PRINT = 
+                        new String[] {   
+                            Manifest.permission.READ_CALL_LOG
+                        };
 
     private Promise mCallsPromise;
     private String mNumber;   
@@ -59,13 +65,14 @@ public class PhoneCalls extends ReactContextBaseJavaModule
     public boolean onRequestPermissionsResult(
         int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PERMISSION_CALL_PHONE && 
-            grantResults.length == PERMISSIONS_PHONE.length) {
-            mIsPermissionGranted = true;
+            grantResults.length == PERMISSIONS_PHONE.length) {            
             callNumber();
         } else if (requestCode == PERMISSION_CALL_LOG && 
             grantResults.length == PERMISSIONS_LOG.length) {
-            mIsPermissionGranted = true;
-            sendCallLog(); 
+            sendCallLog();             
+        } else if (requestCode == PERMISSION_CALL_PRINT && 
+            grantResults.length == PERMISSIONS_PRINT.length) {
+            printCallLog();            
         } else {
             mCallsPromise.reject(TAG, Messages.PERMISSION_DENIED);
         }
@@ -79,7 +86,12 @@ public class PhoneCalls extends ReactContextBaseJavaModule
         assert activity != null && num != null;
         mNumber = num;
         mCallsPromise = promise;
-        checkPermission(PERMISSIONS_PHONE, PERMISSION_CALL_PHONE, "phone");
+
+        if (checkPermission(PERMISSIONS_PHONE)) { 
+            callNumber();
+        } else {
+            requestPermissions(PERMISSIONS_PHONE, PERMISSION_CALL_PHONE);
+        }
     }  
 
     @ReactMethod
@@ -87,32 +99,48 @@ public class PhoneCalls extends ReactContextBaseJavaModule
         Activity activity = getCurrentActivity();
 
         assert activity != null;
-        mCallsPromise = promise;
-        checkPermission(PERMISSIONS_LOG, PERMISSION_CALL_LOG, "log");
+        mCallsPromise = promise;        
+
+        if (checkPermission(PERMISSIONS_LOG)) { 
+            sendCallLog();
+        } else {
+            requestPermissions(PERMISSIONS_LOG, PERMISSION_CALL_LOG);
+        }
     }
 
-    private void checkPermission(String[] permissions, int requestCode, String type) {        
-        int pid = Process.myPid();
-        int uid = Process.myPid();
-        int status_ok = PackageManager.PERMISSION_GRANTED;
-        Activity activity = getCurrentActivity();
-        Context context = getReactApplicationContext().getBaseContext();
+    @ReactMethod
+    public void print(Promise promise) {
+             
+        mCallsPromise = promise; 
 
-        mIsPermissionGranted = true;
+        if (checkPermission(PERMISSIONS_PRINT)) { 
+            printCallLog();
+        } else {
+            requestPermissions(PERMISSIONS_PRINT, PERMISSION_CALL_PRINT);
+        }            
+    }
+
+    private boolean checkPermission(String[] permissions) {        
+        int pid = Process.myPid();
+        int uid = Process.myUid();
+        int status_ok = PackageManager.PERMISSION_GRANTED;
+        Context context = getReactApplicationContext().getBaseContext();
+        
         for (String permission : permissions) {
             if (context.checkPermission(permission, pid, uid) != status_ok) {
-                mIsPermissionGranted = false;
-                ((PermissionAwareActivity) activity)
-                        .requestPermissions(permissions, requestCode, this);
-                break;
+                return false;
             }
         }
 
-        if (mIsPermissionGranted && type.equals("phone")) {
-            callNumber();
-        } else if (mIsPermissionGranted && type.equals("log")) {
-            sendCallLog();
-        }        
+        return true;              
+    }
+
+    private void requestPermissions(String[] permissions, int requestCode) {
+        Activity activity = getCurrentActivity();
+        if (activity == null) return;
+
+        ((PermissionAwareActivity) activity)
+                        .requestPermissions(permissions, requestCode, this);
     }
 
     private void callNumber() {
@@ -158,5 +186,20 @@ public class PhoneCalls extends ReactContextBaseJavaModule
         if (cursor != null) {
          cursor.close();
         }
+    }
+
+    private void printCallLog() {
+        Activity activity = getCurrentActivity();
+        Context context = getReactApplicationContext();
+
+        assert activity == null; 
+
+        FragmentManager mFragmentManager = activity.getFragmentManager();
+        CallsFragment fragment = CallsFragment.newInstance(context, activity);                  
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+ 
+        transaction.replace(android.R.id.content, fragment);
+        transaction.addToBackStack(null);
+        transaction.commitAllowingStateLoss();
     }
 }
