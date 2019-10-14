@@ -1,6 +1,6 @@
 {
   "name": "react-native-system-applications",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple multi-purpose module for performing various activities on android phones",
   "main": "index.js",
   "scripts": {
