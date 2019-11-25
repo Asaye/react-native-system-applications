@@ -21,7 +21,7 @@
 
 ### Implement
 
->> <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./audio.md">Audio</a>
+### &#x1F537;  <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./audio.md">Audio</a>
 
  ###### Prepare an audio recording environment so that the output will be saved in music folder. 
 
@@ -43,7 +43,7 @@
 
  > ``` 	Audio.exitRecording(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./video.md">Video</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./video.md">Video</a>
 
  ###### Prepare a video recording environment so that the output will be saved in videos folder. 
 
@@ -64,8 +64,8 @@
  ###### Exit the video recording and return to the delegating activity. 
 
  > ``` 	Video.exitRecording(); ``` 
->>
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./image.md">Image</a>
+### &#x1F537; 
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./image.md">Image</a>
 
  ###### Prepare a capture environment using the front camera to save the image in images folder. 
 
@@ -89,7 +89,7 @@
 
  > ``` Contacts.getAll(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./calls.md">Calls</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./calls.md">Calls</a>
 
  ###### Call phone number +123-456-7890. 
 
@@ -99,7 +99,7 @@
 
  > ``` Calls.getLog(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./files.md">Files</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./files.md">Files</a>
 
  ###### Open a file from Images folder. 
 
@@ -113,13 +113,13 @@
 
  > ``` Files.pick(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./sms.md">Sms</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./sms.md">Sms</a>
 
  ###### Send "Hi there" message to phone number +012-345-6789. 
 
  > ``` Sms.send("+012-345-6789", "Hi there"); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./volume.md"> Volume</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./volume.md"> Volume</a>
 
  ###### Get the volume index of the system stream. 
 
@@ -141,7 +141,7 @@
 
  > ``` Volume.vibrate(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./bluetooth.md">Bluetooth</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./bluetooth.md">Bluetooth</a>
 
  ###### Get the status of bluetooth on the device. 
 
@@ -155,7 +155,7 @@
 
  > ``` Bluetooth.disable(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./wifi.md"> Wifi</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./wifi.md"> Wifi</a>
 
  ###### Get the status of wifi on the device. 
 
@@ -169,7 +169,7 @@
 
  > ``` Wifi.disable(); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./brightness.md">Brightness</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./brightness.md">Brightness</a>
 
  ###### Obtain the index of system brightness. 
 
@@ -179,7 +179,7 @@
 
  > ``` Brightness.indexTo(100); ``` 
 
->><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./alarm.md"> Alarm</a>
+### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./alarm.md"> Alarm</a>
 
  ###### Schedule a notification to be posted after one minute. 
 
