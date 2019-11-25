@@ -68,7 +68,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
         ...
         _takePictures = () => {
         	setTimeout(() => {
-        		Image.capture()
+        		Image.capture();
         	}, 3000);        	
         } 
 ```
