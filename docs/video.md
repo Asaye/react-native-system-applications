@@ -46,9 +46,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
  ```
+        import { Video } from "react-native-system-applications";
+        ...
+        ...
+        ...
         _prepareRecordingEnv = () => {
         	const params = { "outputFolder": "movies/", "cameraType": "FRONT" };
-        	Sysapps.video.prepare(params);
+        	Video.prepare(params);
         } 
  ```
 >>>><p style = "text-align: justify">Invoking the <code>_prepareRecordingEnv()</code> function prepares the recording environment using the front camera so that the output will be saved in <code>movies</code> folder (don't forget the last backslash). This makes the media recorder to be ready for recording and a user interface with a preview having a START/STOP button appears on the screen of the device. After this, there are two options to start recording. The first one is to call the <code>startRecording()</code> function programmatically. And the second option is to manually press the START button on the created user interface.</p>
@@ -69,9 +73,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 ##### Sample code snippet
 
 ```
+        import { Video } from "react-native-system-applications";
+        ...
+        ...
+        ...
         _startVideoRecording = () => {
         	setTimeout(() => {
-        		Sysapps.video.startRecording();
+        		Video.startRecording();
         	}, 3000);        	
         } 
 ```
@@ -84,8 +92,12 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ```
+            import { Video } from "react-native-system-applications";
+            ...
+            ...
+            ...
             _stopVideoRecording = () => {
-                Sysapps.video.stopRecording();
+                Video.stopRecording();
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_stopVideoRecording()</code> function terminates an ongoing recording activity.</p>
@@ -96,11 +108,18 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ```
-            _checkVideoRecording = async () => {
-                const recording = await Sysapps.video.isRecording();
-                if (recording) {
-                	Sysapps.video.stopRecording();
-                }
+            import { Video } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _checkVideoRecording = () => {
+                Video.isRecording().then((res) => {
+                    if (res) {
+                        Video.stopRecording();
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_checkVideoRecording()</code> checks if there is an ongoing recording activity and the <code>stopRecording()</code> function is called if the response is <code>true</code>.</p>
@@ -111,8 +130,12 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
  ##### Sample code snippet
 ```
+            import { Video } from "react-native-system-applications";
+            ...
+            ...
+            ...
             _exitVideoRecording = () => {
-                Sysapps.video.exitRecording();
+                Video.exitRecording();
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_exitVideoRecording()</code> function aborts an ongoing recording activity and closes the preview.</p>

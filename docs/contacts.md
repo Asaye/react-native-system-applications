@@ -25,9 +25,16 @@
 ##### Sample code snippet
 
 ``` 
-            _pickContact = async () => {
-                const contact = await Sysapps.contacts.pick();
-                console.log(contact);
+            import { Contacts } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _pickContact = () => {
+                Contacts.pick().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -48,9 +55,16 @@
 ##### Sample code snippet
 
 ``` 
-            _getAllContacts = async () => {
-                const list = await Sysapps.contacts.getAll();
-                console.log(list);
+            import { Contacts } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _getAllContacts = () => {
+                Contacts.getAll().then((res) => {
+                    console.log(res);   // see the output format below
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -73,8 +87,16 @@
 ##### Sample code snippet
 
 ``` 
-            _printContacts = async () => {
-                await Sysapps.contacts.print();
+            import { Contacts } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _printContacts = () => {
+                Contacts.print().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 

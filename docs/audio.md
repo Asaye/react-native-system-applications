@@ -41,9 +41,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ``` 
+        import { Audio } from "react-native-system-applications";
+        ....
+        ....
+        ....
         _prepareMediaRecorder = () => {
         	const params = { "outputFolder": "Music/" };
-        	Sysapps.audio.prepare(params);
+        	Audio.prepare(params);
         } 
 ```
 
@@ -64,9 +68,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
     
 ##### Sample code snippet
 ``` 
+        import { Audio } from "react-native-system-applications";
+        ....
+        ....
+        ....
         _startAudioRecording = () => {
         	setTimeout(() => {
-        		Sysapps.audio.startRecording();
+        		Audio.startRecording();
         	}, 1000);        	
         } 
 ```
@@ -78,24 +86,35 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 <p style = "text-align: justify">is used to terminate an ongoing audio recording activity. Calling this function is equivalent to pressing the STOP button. After calling this function, the media recording evnvironment is still set up and another session of audio recording can be started by calling <code>startRecording()</code> function or by pressing the START button.</p>
 
 ##### Sample code snippet
-``` 
+```     
+            import { Audio } from "react-native-system-applications";
+            ....
+            ....
+            ....
             _stopAudioRecording = () => {
-                Sysapps.audio.stopRecording();
+                Audio.stopRecording();
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_stopAudioRecording()</code> function terminates an ongoing recording activity.</p>
 
 #### isRecording(): 
 
-<p style = "text-align: justify">is used to check whether there is an ongoing recording activity or not. This might be useful if you want to call <code>startRecording()</code> function while there is no any ongoing recording activity or to call <code>stopRecording()</code> function while there is a checked ongoing recording activity.</p>
+<p style = "text-align: justify">is used to check whether there is an ongoing recording activity or not. This might be useful if you want to call <code>startRecording()</code> function while there is no any ongoing recording activity or to call <code>stopRecording()</code> function while there is a confirmed ongoing recording activity.</p>
 
 ##### Sample code snippet
 ``` 
-            _checkAudioRecording = async () => {
-                const recording = await Sysapps.audio.isRecording();
-                if (recording) {
-                	Sysapps.audio.stopRecording();
-                }
+            import { Audio } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _checkAudioRecording = () => {
+                Audio.isRecording().then((res) => {
+                    if (res) {
+                        Audio.stopRecording();
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_checkAudioRecording()</code> checks if there is an ongoing recording activity and the <code>stopRecording()</code> function is called if the response is <code>true</code>.</p>
@@ -106,8 +125,12 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ``` 
+            import { Audio } from "react-native-system-applications";
+            ....
+            ....
+            ....
             _exitAudioRecording = () => {
-                Sysapps.audio.exitRecording();
+                Audio.exitRecording();
             } 
 ```
 

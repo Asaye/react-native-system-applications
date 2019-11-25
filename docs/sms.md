@@ -24,8 +24,16 @@
 ##### Sample code snippet
 
 ``` 
-            _sendSms = async () => {
-                await Sysapps.sms.send("+123456789", "Hi, how are you?");
+			import { Sms } from "react-native-system-applications";
+            ...
+            ...
+            ....
+            _sendSms = () => {
+                Sms.send("+123456789", "Hi, how are you?").then((res) => {
+                	// do something
+                }).catch((err) => {
+                	console.log(err);
+                });
             } 
 ```
 

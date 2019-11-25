@@ -80,6 +80,10 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
+        import { Alarm } from "react-native-system-applications";
+        ....
+        ....
+        ....
         _scheduleNotification = () => {
             const date = new Date(2019, 8, 1, 8, 30, 0); // Sep 01 2019 @ 8:30:00 AM        	 
         	const params = { 
@@ -91,7 +95,7 @@ You can also add any other key-value pairs in addition to the above so that you 
                 "key2": false, 
                 "key3": 14123 
         	};
-        	Sysapps.alarm.schedule(params);
+        	Alarm.schedule(params);
         } 
  ```
 
@@ -104,9 +108,13 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
+        import { Alarm } from "react-native-system-applications";
+        ....
+        ....
+        ....
         _updateNotif_abc123 = () => {
             const date = new Date(2019, 8, 2, 8, 30, 0); // Sep 02 2019 @ 8:30:00 AM  
-        	Sysapps.alarm.update({ "channelId": "abc123", "date": date.getTime() });        	
+        	Alarm.update({ "channelId": "abc123", "date": date.getTime() });        	
         } 
 ```
 <p style = "text-align: justify">Invoking the <code>_updateNotif_abc123()</code> function updates a scheduled notification with <code>channelId</code> of <code>abc123</code> by changing the date when the notification will be posted to Sep 02 2019 @ 8:30:00 AM local time.</p>
@@ -118,9 +126,16 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
-            _referScheduledNotif = async () => {
-                const params = await Sysapps.alarm.refer("abc123");
-                console.log(params);
+            import { Alarm } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _referScheduledNotif = () => {
+                Alarm.refer("abc123").then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_referScheduledNotif()</code> function obtains the data associated with a scheduled alarm notification having a <code>channelId</code> of <code>abc123</code> and logs the response.</p>
@@ -132,8 +147,12 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
+            import { Alarm } from "react-native-system-applications";
+            ....
+            ....
+            ....
             _cancelNotification = () => {
-                Sysapps.alarm.cancel("abc123");
+                Alarm.cancel("abc123");
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_cancelNotification()</code> cancels an alarm notification having a <code>channelId</code> of <code>abc123</code>.</p>
@@ -145,8 +164,12 @@ You can also add any other key-value pairs in addition to the above so that you 
 ##### Sample code snippet
 
 ```
+            import { Alarm } from "react-native-system-applications";
+            ....
+            ....
+            ....
             _cancelAllNotifications = () => {
-                Sysapps.alarm.cancelAll();
+                Alarm.cancelAll();
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_cancelAllNotifications()</code> function cancels all notifications scheduled via the <code>schedule()</code> function and deletes the corresponding data.</p>

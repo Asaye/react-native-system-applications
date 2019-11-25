@@ -29,8 +29,16 @@
 ##### Sample code snippet
 
 ``` 
-            _turnOnWifi = async () => {
-                await Sysapps.wifi.enable();
+            import { Wifi } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _turnOnWifi = () => {
+                Wifi.enable().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -42,9 +50,17 @@
 
 ##### Sample code snippet
 
-``` 
-            _turnOffWifi = async () => {
-                await Sysapps.wifi.disable();
+```
+            import { Wifi } from "react-native-system-applications";
+            ...
+            ...
+            ... 
+            _turnOffWifi = () => {
+                Wifi.disable().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -57,11 +73,18 @@
 ##### Sample code snippet
 
 ``` 
-            _getWifiState = async () => {
-                const isWifiEnabled = await Sysapps.wifi.isEnabled();
-           		if (isWifiEnabled) {
-           			// do something
-           		}
+            import { Wifi } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _getWifiState = () => {
+                Wifi.isEnabled().then((res) => {
+                    if (res) {
+                       // do something 
+                   }                    
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 

@@ -6,11 +6,11 @@
 <p style = "text-align: justify">The files module contains the following functions.</p>
 
 ``` 
-    	open(String path)
-   	getPath()
-    	pick()
-    	download(String src, String dest)
-    	upload(String dest)
+        open(String path)
+        getPath()
+        pick()
+        download(String src, String dest)
+        upload(String dest)
 ```
 
 ### Permissions
@@ -40,7 +40,7 @@ For API level 23 and below devices, only the first configuration is required. Fo
 3. Create a folder named <code>xml</code> inside <code>yourAppName\android\app\src\main\res</code> (if there isn't any) and create a file named <code>provider_paths.xml</code> inside the folder and add the following content in the file. As stated above, the contents of this file can be changed to meet your desired accessible file locations.
 
 ```
-	<?xml version='1.0' encoding='utf-8'?>
+    <?xml version='1.0' encoding='utf-8'?>
         <paths xmlns:android="http://schemas.android.com/apk/res/android">
             <root-path name="root" path=""/>
             <files-path name="files" path="/" />
@@ -59,10 +59,18 @@ For API level 23 and below devices, only the first configuration is required. Fo
 
 ##### Sample code snippet
 
-``` 
-            _openFile = async () => {
-            	const path = "/storage/emulated/0/DCIM/Camera/myPic.jpg";
-                await Sysapps.files.open(path);
+```
+            import { Files } from "react-native-system-applications";
+            ....
+            ....
+            .... 
+            _openFile = () => {
+                const path = "/storage/emulated/0/DCIM/Camera/myPic.jpg";
+                Files.open(path).then((res) => {
+                    // do something
+                }).catch((err) => {
+                  console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Call to  <code>_openFile()</code> will open the specified file for successful requests or a promise rejection will be sent if something goes wrong.</p>
@@ -74,9 +82,16 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ##### Sample code snippet
 
 ``` 
-            _getFilePath = async () => {
-                const path = await Sysapps.files.getPath();
-                console.log(path);
+            import { Files } from "react-native-system-applications";
+            ....
+            ....
+            .... 
+            _getFilePath = () => {
+                Files.getPath().then((res) => {
+                    console.log(res);  // see the output format below
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -94,8 +109,16 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ##### Sample code snippet
 
 ``` 
-            _openFileFromPicker = async () => {
-                await Sysapps.files.pick();
+            import { Files } from "react-native-system-applications";
+            ....
+            ....
+            .... 
+            _openFileFromPicker = () => {
+                Files.pick().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -109,10 +132,18 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ##### Sample code snippet
 
 ``` 
-            _downloadFile = async () => {
-	    	const src = "http://www.mywebservice.com/download/myVideo.mp4",
-		      dest = "/storage/emulated/0/videos/";
-                await Sysapps.files.download(src, dest);
+            import { Files } from "react-native-system-applications";
+            ....
+            ....
+            .... 
+            _downloadFile = () => {
+                  const src = "http://www.mywebservice.com/download/myVideo.mp4",
+                        dest = "/storage/emulated/0/videos/";
+                  Files.download(src, dest).then((res) => {
+                      // file downloaded
+                  }).catch((err) => {
+                      console.log(err);
+                  });
             } 
 ```
 
@@ -125,9 +156,17 @@ For API level 23 and below devices, only the first configuration is required. Fo
 ##### Sample code snippet
 
 ``` 
-            _uploadFile = async () => {
-	    	const dest = "http://www.mywebservice.com/upload";
-                await Sysapps.files.upload(dest);
+            import { Files } from "react-native-system-applications";
+            ....
+            ....
+            .... 
+            _uploadFile = () => {
+                const dest = "http://www.mywebservice.com/upload";
+                Files.upload(dest).then((res) => {
+                     // file uploaded
+                }).catch((err) => {
+                     console.log(err);
+                });
             } 
 ```
 

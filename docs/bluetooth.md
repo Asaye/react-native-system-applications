@@ -34,8 +34,16 @@
 ##### Sample code snippet
 
  ```
-            _turnOnBluetooth = async () => {
-                await Sysapps.bluetooth.enable();
+            import { Bluetooth } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _turnOnBluetooth = () => {
+                Bluetooth.enable().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
  ```
 
@@ -48,8 +56,16 @@
 ##### Sample code snippet
 
 ```
-            _turnOffBluetooth = async () => {
-                await Sysbluetooth.bluetooth.disable();
+            import { Bluetooth } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _turnOffBluetooth = () => {
+                Bluetooth.disable().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -62,11 +78,18 @@
 ##### Sample code snippet
 
 ```
-            _getBluetoothState = async () => {
-                const isBluetoothEnabled = await Sysapps.bluetooth.isEnabled();
-                if (isBluetoothEnabled) {
-           			// do something
-           		}
+            import { Bluetooth } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _getBluetoothState = () => {
+                Bluetooth.isEnabled().then((res) => {
+                    if (res) {
+                        // bluetooth is enabled
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });                
             } 
 ```
 

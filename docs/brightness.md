@@ -29,10 +29,17 @@
  ##### Sample code snippet
  
  ```
-      _getBrightness = async () => {
-           const brightness = await Sysbluetooth.brightness.index();
-             console.log(brightness);
-          } 
+      import { Brightness } from "react-native-system-applications";
+      ....
+      ....
+      ....
+      _getBrightness = () => {
+           Brightness.index().then((res) => {
+                console.log(res); // see the output format below
+           }).catch((err) => {
+                console.log(err);
+           });
+      } 
  ```
  <p style = "text-align: justify">Call to  <code>_getBrightness()</code> will attempt to obtain the brightness index of the screen and the result will be logges as below.If something goes wrong during the request, a promise rejection will be sent.</p>
  
@@ -48,8 +55,16 @@
 
 ##### Sample code snippet
 ```
-            _setBrightnessValue = async () => {
-                 await Sysapps.brightness.indexTo(100);
+            import { Brightness } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _setBrightnessValue = () => {
+                 Brightness.indexTo(100).then((res) => {
+                      // do something
+                 }).catch((err) => {
+                      console.log(err);
+                 });
              } 
 ```
 <p style = "text-align: justify">After the  <code>_setBrightnessValue()</code> function is called, the brightness of the screen will be set to <code>100</code> for successful requests or a promise rejection will be sent if something goes wrong.</p>

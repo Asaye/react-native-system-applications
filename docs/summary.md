@@ -12,7 +12,9 @@
 ```  react-native link react-native-system-applications```
 
 ### Import
-```  import Sysapps from 'react-native-system-applications';```
+```  import { Audio, Alarm, Video, Image, 
+	          Files, Sms, Volume, Wifi, Calls, 
+	          Contacts, Bluetooth, Brightness} from 'react-native-system-applications';```
 
 ### Implement
 
@@ -20,181 +22,181 @@
 
 >>> ###### Prepare an audio recording environment so that the output will be saved in music folder. 
 
->>> > ``` Sysapps.audio.prepare({ "outputFolder": "music/" }); ``` 
+>>> > ``` Audio.prepare({ "outputFolder": "music/" }); ``` 
 >>>
 >>> ###### Start audio recording. 
 
->>> > ``` 	Sysapps.audio.startRecording(); ``` 
+>>> > ``` 	Audio.startRecording(); ``` 
 >>>
 >>> ###### Stop audio recording and prepare for another recording session. 
 
->>> > ``` 	Sysapps.audio.stopRecording(); ``` 
+>>> > ``` 	Audio.stopRecording(); ``` 
 >>>
 >>> ###### Check if there is an ongoing audio recording activity. 
 
->>> > ``` 	Sysapps.audio.isRecording(); ``` 
+>>> > ``` 	Audio.isRecording(); ``` 
 >>>
 >>> ###### Exit the audio recording and return to the delegating activity. 
 
->>> > ``` 	Sysapps.audio.exitRecording(); ``` 
+>>> > ``` 	Audio.exitRecording(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./video.md">Video</a>
 
 >>> ###### Prepare a video recording environment so that the output will be saved in videos folder. 
 
->>> > ``` Sysapps.video.prepare({ "outputFolder": "videos/" }); ``` 
+>>> > ``` Video.prepare({ "outputFolder": "videos/" }); ``` 
 >>>
 >>> ###### Start video recording. 
 
->>> > ``` 	Sysapps.video.startRecording(); ``` 
+>>> > ``` 	Video.startRecording(); ``` 
 >>>
 >>> ###### Stop video recording and prepare for another recording session. 
 
->>> > ``` 	Sysapps.video.stopRecording(); ``` 
+>>> > ``` 	Video.stopRecording(); ``` 
 >>>
 >>> ###### Check if there is an ongoing video recording activity. 
 
->>> > ``` 	Sysapps.video.isRecording(); ``` 
+>>> > ``` 	Video.isRecording(); ``` 
 >>>
 >>> ###### Exit the video recording and return to the delegating activity. 
 
->>> > ``` 	Sysapps.video.exitRecording(); ``` 
+>>> > ``` 	Video.exitRecording(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./image.md">Image</a>
 
 >>> ###### Prepare a capture environment using the front camera to save the image in images folder. 
 
->>> > ``` Sysapps.image.prepare({outputFolder: "images/", "cameraType": "FRONT"}); ``` 
+>>> > ``` Image.prepare({outputFolder: "images/", "cameraType": "FRONT"}); ``` 
 
 >>> ###### Take pictures. 
 
->>> > ``` Sysapps.image.capture(); ``` 
+>>> > ``` Image.capture(); ``` 
 >>>
 >>> ###### Exit image capturing activity. 
 
->>> > ``` Sysapps.image.exitCapture(); ``` 
+>>> > ``` Image.exitCapture(); ``` 
 > >
 > > <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./contacts.md">Contacts</a>
 
 >>> ###### Obtain a user picked contact. 
 
->>> > ``` Sysapps.contacts.pick(); ``` 
+>>> > ``` Contacts.pick(); ``` 
 
 >>> ###### Obtain all contacts. 
 
->>> > ``` Sysapps.contacts.getAll(); ``` 
+>>> > ``` Contacts.getAll(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./calls.md">Calls</a>
 
 >>> ###### Call phone number +123-456-7890. 
 
->>> > ``` Sysapps.calls.call("+123-456-7890"); ``` 
+>>> > ``` Calls.call("+123-456-7890"); ``` 
 
 >>> ###### Obtain up to 500 call logs. 
 
->>> > ``` Sysapps.calls.getLog(); ``` 
+>>> > ``` Calls.getLog(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./files.md">Files</a>
 
 >>> ###### Open a file from Images folder. 
 
->>> > ``` Sysapps.files.open("Images/myPic.jpg"); ``` 
+>>> > ``` Files.open("Images/myPic.jpg"); ``` 
 
 >>> ###### Get absolute path of a file from file picker. 
 
->>> > ``` Sysapps.files.getPath(); ``` 
+>>> > ``` Files.getPath(); ``` 
 >
 >>> ###### Open a file from file picker. 
 
->>> > ``` Sysapps.files.pick(); ``` 
+>>> > ``` Files.pick(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./sms.md">Sms</a>
 >>
 >>> ###### Send "Hi there" message to phone number +012-345-6789. 
 
->>> > ``` Sysapps.sms.send("+012-345-6789", "Hi there"); ``` 
+>>> > ``` Sms.send("+012-345-6789", "Hi there"); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./volume.md"> Volume</a>
 
 >>> ###### Get the volume index of the system stream. 
 
->>> > ``` Sysapps.volume.indexOf("system"); ``` 
+>>> > ``` Volume.indexOf("system"); ``` 
 
 >>> ###### Set the volume index of alarm to 10. 
 
->>> > ``` Sysapps.volume.indexTo("alarm", 10); ``` 
+>>> > ``` Volume.indexTo("alarm", 10); ``` 
 
 >>> ###### Change ringer mode to silent. 
 
->>> > ``` Sysapps.volume.silence(); ``` 
+>>> > ``` Volume.silence(); ``` 
 
 >>> ###### Change ringer mode to normal. 
 
->>> > ``` Sysapps.volume.normalize(); ``` 
+>>> > ``` Volume.normalize(); ``` 
 >
 >>> ###### Change ringer mode to vibrate. 
 
->>> > ``` Sysapps.volume.vibrate(); ``` 
+>>> > ``` Volume.vibrate(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./bluetooth.md">Bluetooth</a>
 
 >>> ###### Get the status of bluetooth on the device. 
 
->>> > ``` Sysapps.bluetooth.isEnabled(); ``` 
+>>> > ``` Bluetooth.isEnabled(); ``` 
 
 >>> ###### Enable bluetooth. 
 
->>> > ``` Sysapps.bluetooth.enable(); ``` 
+>>> > ``` Bluetooth.enable(); ``` 
 >
 >>> ###### Disable bluetooth. 
 
->>> > ``` Sysapps.bluetooth.disable(); ``` 
+>>> > ``` Bluetooth.disable(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./wifi.md"> Wifi</a>
 
 >>> ###### Get the status of wifi on the device. 
 
->>> > ``` Sysapps.wifi.isEnabled(); ``` 
+>>> > ``` Wifi.isEnabled(); ``` 
 
 >>> ###### Enable wifi. 
 
->>> > ``` Sysapps.wifi.enable(); ``` 
+>>> > ``` Wifi.enable(); ``` 
 >
 >>> ###### Disable wifi. 
 
->>> > ``` Sysapps.wifi.disable(); ``` 
+>>> > ``` Wifi.disable(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./brightness.md">Brightness</a>
 
 >>> ###### Obtain the index of system brightness. 
 
->>> > ``` Sysapps.brightness.index(); ``` 
+>>> > ``` Brightness.index(); ``` 
 
 >>> ###### Set system brightness to 100. 
 
->>> > ``` Sysapps.brightness.indexTo(100); ``` 
+>>> > ``` Brightness.indexTo(100); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./alarm.md"> Alarm</a>
 
 >>> ###### Schedule a notification to be posted after one minute. 
 
->>> > ``` Sysapps.alarm.schedule({ "channelId": "abc123", "date": (new Date()).getTime() + 60000 }); ``` 
+>>> > ``` Alarm.schedule({ "channelId": "abc123", "date": (new Date()).getTime() + 60000 }); ``` 
 
 >>> ###### Add title to a scheduled notification having channedId of abc123. 
 
->>> > ``` Sysapps.alarm.update({"channelId": "abc123", "title": "myTitle"}); ``` 
+>>> > ``` Alarm.update({"channelId": "abc123", "title": "myTitle"}); ``` 
 >>>
 >>> ###### Have an overview of a scheduled notification. 
 
->>> > ``` Sysapps.alarm.refer("abc123"); ``` 
+>>> > ``` Alarm.refer("abc123"); ``` 
 
 >>> ###### Cancel an alarm notification with channelId of abc123. 
 
->>> > ``` Sysapps.alarm.cancel("abc123"); ``` 
+>>> > ``` Alarm.cancel("abc123"); ``` 
 >>>
 >>> ###### Cancel all notifications. 
 
->>> > ``` Sysapps.alarm.cancelAll(); ``` 
+>>> > ``` Alarm.cancelAll(); ``` 
 
 
 ​			 

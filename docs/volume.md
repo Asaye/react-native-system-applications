@@ -28,9 +28,16 @@
 
 ##### Sample code snippet
 ``` 
-            _getAudioVolume = async () => {
-                const vol = await Sysapps.volume.indexOf("system");
-                console.log(vol);
+            import { Volume } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _getAudioVolume = () => {
+                Volume.indexOf("system").then((res) => {
+                    console.log(res); // see the output format below
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -50,9 +57,18 @@
 <p style = "text-align: justify"> is used to set the current index of the audio stream of the device as specified by the <code>type</code> parameter. The possible values for <code>type</code> are: <code>"alarm"</code> , <code>"music"</code> , <code>"notification"</code> , <code>"ring"</code> , <code>"voicecall"</code> and  <code>"system"</code>. Note that if the value of <code>index</code> parameter is not between the minimum and maximum audio indices  of the device, the intended outcome may not be achieved. The minimum and maximum indices can be requested by calling the above function. </p>
 
 ##### Sample code snippet
+
 ``` 
-            _setAudioVolume = async () => {
-                await Sysapps.volume.indexTo("music", 7);
+            import { Volume } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _setAudioVolume = () => {
+                Volume.indexTo("music", 7).then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Call to  <code>_setAudioVolume()</code> sets the audio index of the music stream to 7 for successful requests or a promise rejection if something goes wrong.</p>
@@ -64,8 +80,16 @@
 ##### Sample code snippet
 
 ``` 
-            _silenceRinger = async () => {
-                await Sysapps.volume.silence();
+            import { Volume } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _silenceRinger = () => {
+                Volume.silence().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Call to  <code>_silenceRinger()</code> sets the ringer mode of the device to silent with no vibration for successful requests or a promise rejection if something goes wrong.</p>
@@ -77,8 +101,16 @@
 ##### Sample code snippet
 
 ``` 
-            _vibrateRinger = async () => {
-                await Sysapps.volume.vibrate();
+            import { Volume } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _vibrateRinger = () => {
+                Volume.vibrate().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 <p style = "text-align: justify">Call to  <code>_vibrateRinger()</code> sets the ringer mode of the device to silent but with vibration for successful requests or a promise rejection if something goes wrong.</p>
@@ -90,8 +122,16 @@
 ##### Sample code snippet
 
 ```
-            _normalizeRinger = async () => {
-                await Sysapps.volume.normalize();
+            import { Volume } from "react-native-system-applications";
+            ...
+            ...
+            ...
+            _normalizeRinger = () => {
+                Volume.normalize().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 

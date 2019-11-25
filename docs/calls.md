@@ -30,8 +30,16 @@
 ##### Sample code snippet
 
 ``` 
-            _callNumber = async () => {
-                await Sysapps.calls.call("+123456789");
+            import { Calls } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _callNumber = () => {
+                Calls.call("+123456789").then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 
@@ -44,9 +52,16 @@
 ##### Sample code snippet
 
 ``` 
-            _getCallLog = async () => {
-                const callData = await Sysapps.calls.getLog();
-                console.log(callData);
+            import { Calls } from "react-native-system-applications";
+            ....
+            ....
+            ....
+            _getCallLog = () => {
+                Calls.getLog().then((res) => {
+                    console.log(res);  // see the output format below
+                }).catch((err) => {
+                    console.log(err);
+                });                
             } 
 ```
 
@@ -86,8 +101,16 @@
 ##### Sample code snippet
 
 ``` 
+            import { Calls } from "react-native-system-applications";
+            ....
+            ....
+            ....
             _printCallLog = async () => {
-                await Sysapps.calls.print();
+                Calls.print().then((res) => {
+                    // do something
+                }).catch((err) => {
+                    console.log(err);
+                });
             } 
 ```
 

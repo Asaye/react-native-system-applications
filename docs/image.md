@@ -40,9 +40,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
  ```
+        import { Image } from "react-native-system-applications";
+        ...
+        ...
+        ...
         _prepareCaptureEnv = () => {
         	const params = { "outputFolder": "images/", "cameraType": "FRONT" };
-        	Sysapps.image.prepare(params);
+        	Image.prepare(params);
         } 
  ```
 <p style = "text-align: justify">Invoking the <code>_prepareCaptureEnv()</code> function prepares environment for image capturing using the front camera so that the output will be saved in <code>images</code> folder (don't forget the last backslash). This makes the device to be ready for capturing and a user interface with a preview having a CAPTURE button appears on the screen of the device. After this, there are two options to take pictures. The first one is to call the <code>capture()</code> function programmatically. And the second option is to manually press the CAPTURE button on the created user interface.</p>
@@ -58,9 +62,13 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ```
+        import { Image } from "react-native-system-applications";
+        ...
+        ...
+        ...
         _takePictures = () => {
         	setTimeout(() => {
-        		Sysapps.image.capture();
+        		Image.capture()
         	}, 3000);        	
         } 
 ```
@@ -74,8 +82,12 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 ##### Sample code snippet
 ```
+            import { Image } from "react-native-system-applications";
+            ...
+            ...
+            ...
             _exitImageCapture = () => {
-                Sysapps.image.exitCapture();
+                Image.exitCapture();
             } 
 ```
 <p style = "text-align: justify">Invoking the <code>_exitImageCapture()</code> function aborts an ongoing image capturing activity and closes preview.</p>
