@@ -12,7 +12,16 @@
 * Download , upload or open files
 * Control device settings.
 
-<p style = "text-align: justify">All these tasks can be performed by importing just one field from the module. However, one may not be interested in performing all these tasks and the module is designed keeping this in mind. As a result, the module is comprised of twelve loosely coupled sub-modules. This, to the least, reduces the number of required permissions which would be added if the sub-modules weren't loosely coupled. You just need to call the sub-module you are intersted in and add only the required permssions (if any) by that sub-module and you can achieve the intended task.</p>
+<p style = "text-align: justify">To perform these tasks, the module offers the following twelve components.</p>
+
+<table>
+<tr><td>[Audio](./docs/audio.md)</td><td>[Video](./docs/video.md)</td><td>[Image](./docs/image.md)</td></tr>
+<tr><td>[Contacts](./docs/contacts.md)</td><td>[Calls](./docs/calls.md)</td><td>[Files](./docs/files.md)</td></tr>
+<tr><td>[Sms](./docs/sms.md)</td><td>[Volume](./docs/volume.md)</td><td>[Bluetooth](./docs/bluetooth.md)</td></tr>
+<tr><td>[Wifi](./docs/wifi.md)</td><td>[Brightness](./docs/brightness.md)</td><td>[Alarm](./docs/alarm.md)</td></tr>
+</table>
+
+The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
 
 # Getting Started
 
@@ -38,7 +47,7 @@ If the automatic linking fails for some reason, you can do the linking manually 
  
  ```
  	include ':react-native-system-applications'
- 	project(':react-native-system-applications').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-system-		applications/android')
+ 	project(':react-native-system-applications').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-system-applications/android')
  ```
 
  * add the following inside the dependencies closure of  <code>yourAppName/android/app/build.gradle</code> file:
@@ -64,38 +73,23 @@ If the automatic linking fails for some reason, you can do the linking manually 
 
 
 ### Usage
-The module is simple to use. Just import the main module, call one of the twelve submodules and invoke the methods. The main module is imported like so:
+The module is simple to use. Just import the component that you want to work with and invoke the methods. For instance, the 
+<code>Files</code> component is imported like so:
+
+```   import { Files } from 'react-native-system-applications';```
+
+Then, if you want to pick a file with a file picker, you can invoke the <code>pick()</code> function on the 
+<code>Files</code> object as follows:
+
+```    Files.pick()    ```
+
+For versions below 2.0.0, you can achieve the same outcome as above using:
 
 ```   import Sysapps from 'react-native-system-applications';```
 
-You can also use your custom name for the main module without any loss of functionality as below:
+```   Sysapps.files.pick()    ```
 
-```   import mySystemApp from 'react-native-system-applications';```
-
-<p style = "text-align: justify">For simplicity and modularity reasons, the module is comprised of the following loosely coupled sub-modules. Each submodule is independent of the other, and you just need to call the module which you are interested in via the above imported field.</p>
-
- * [audio](./docs/audio.md)
- * [video](./docs/video.md)
- * [image](./docs/image.md)
- * [contacts](./docs/contacts.md)
- * [calls](./docs/calls.md)
- * [files](./docs/files.md)
- * [sms](./docs/sms.md)
- * [volume](./docs/volume.md)
- * [bluetooth](./docs/bluetooth.md)
- * [wifi](./docs/wifi.md)
- * [brightness](./docs/brightness.md)
- * [alarm](./docs/alarm.md)
-
-
-<p style = "text-align: justify">For instance, if you want to use the <code>wifi</code> module, call it like so:
-
- ```   Sysapps.wifi    ```
-<p style = "text-align: justify">Then, invoke the methods which the resulting object contains. For instance, to enable wifi on the device, what you have to do is: </p>
-
-```    Sysapps.wifi.enable()   ```
-
-The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
+This approach is still feasible with the recent versions and there is no issue regarding backward compatibility.
 
 ## Issues or suggestions?
 In some cases, the module might work only for devices with higher API levels. You might have issues if you are working with older API levels. For such and other  issues or if you want to suggest something , you can write it [here](https://github.com/Asaye/react-native-system-applications/issues).
