@@ -21,7 +21,7 @@
    [Image](./docs/image.md)      | [Brightness](./docs/brightness.md) | [Volume](./docs/volume.md)   |  [Sms](./docs/sms.md) 
  
   
-The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
+The links to the above components lead to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
 
 # Getting Started
 
@@ -36,7 +36,8 @@ Using yarn
 ```	$ yarn add react-native-system-applications```
 
 ### Linking
-There are two options for linking:
+	There are two options for linking:
+	
 ##### 1. Automatic
 
 ```	react-native link react-native-system-applications```
