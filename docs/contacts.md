@@ -18,7 +18,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### pick(): 
+#### &#x1F537; pick(): 
 
 > ><p style = "text-align: justify">is used to pick a user selected contact from the device.</p>
 
@@ -48,7 +48,7 @@
             [{ "Name": "Mr. John Doe", "Number": "+1234567890"}]
 ```
 
-#### getAll(): 
+#### &#x1F537; getAll(): 
 
 <p style = "text-align: justify">is used to get list of all contacts from the device.</p>
 
@@ -80,7 +80,7 @@
           ]
 ```
 
-#### print(): 
+#### &#x1F537; print(): 
 
 <p style = "text-align: justify">is used to print all contacts from the device in pdf format. The user gets the location of the saved document from an alert notification. </p>
 

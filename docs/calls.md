@@ -23,7 +23,7 @@
 
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### call(String number): 
+#### &#x1F537; call(String number): 
 
 <p style = "text-align: justify">is used to call a phone number specified by <code>number</code> parameter.</p>
 
@@ -45,7 +45,7 @@
 
 <p style = "text-align: justify">Invoking the <code>_callNumber()</code> function makes a call to the arbitrary number passed as a parameter. A promise rejection will be sent for unsuccessful requests.</p>
 
-#### getLog(): 
+#### &#x1F537; getLog(): 
 
 <p style = "text-align: justify">is used to retrieve upto 500 call data from the device.</p>
 
@@ -94,7 +94,7 @@
 
 <p style = "text-align: justify">Note that the <code>Duration</code> values are the call durations in seconds and <code>Date</code> values are string values of the number of milliseconds between the call time and January 1,1970 00:00:00. It is possible to convert it into human understandable date using the javascript <code>Date</code> object.</p>
 
-#### print(): 
+#### &#x1F537; print(): 
 
 <p style = "text-align: justify">is used to print upto 500 call data from the device in pdf format. The user gets the location of the saved document from an alert notification. </p>
 

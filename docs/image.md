@@ -24,7 +24,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### prepare(Object options): 
+#### &#x1F537; prepare(Object options): 
 
 <p style = "text-align: justify">is used to prepare an environment for image capturing and to display a preview. The <code>options</code> parameter can have the properties shown below. 
     
@@ -51,7 +51,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
  ```
 <p style = "text-align: justify">Invoking the <code>_prepareCaptureEnv()</code> function prepares environment for image capturing using the front camera so that the output will be saved in <code>images</code> folder (don't forget the last backslash). This makes the device to be ready for capturing and a user interface with a preview having a CAPTURE button appears on the screen of the device. After this, there are two options to take pictures. The first one is to call the <code>capture()</code> function programmatically. And the second option is to manually press the CAPTURE button on the created user interface.</p>
 
-#### capture(): 
+#### &#x1F537; capture(): 
 
 <p style = "text-align: justify">is used to capture images. Calling this function is equivalent to pressing the CAPTURE button. After calling the <code>prepare()</code> function and before calling this one, I recommend to provide at least three seconds (3000ms) gap to make sure that the capturing environment is prepared and ready to take pictures. Once the preview is started, the image capturing can be terminated by:</p>
 
@@ -76,7 +76,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 <p style = "text-align: justify">Invoking the <code>_takePictures()</code> function captures an image after 3000ms.</p>
 
 
-#### exitCapture(): 
+#### &#x1F537; exitCapture(): 
 
 <p style = "text-align: justify">is used to exit the image capturing activity. Calling this function is equivalent to pressing the back button. No further pictures can be taken after calling this funtion.</p>
 

@@ -22,7 +22,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### indexOf(String type): 
+#### &#x1F537; indexOf(String type): 
 
 <p style = "text-align: justify">is used to obtain the current, minimum and maximum volume indices of the audio stream of the device as specified by <code>type</code> parameter. The possible values for <code>type</code> are: <code>"alarm"</code> , <code>"music"</code> , <code>"notification"</code> , <code>"ring"</code> , <code>"voicecall"</code> and  <code>"system"</code>.</p>
 
@@ -52,7 +52,7 @@
                 }
 ```
 
-#### indexTo(String type, int index): 
+#### &#x1F537; indexTo(String type, int index): 
 
 <p style = "text-align: justify"> is used to set the current index of the audio stream of the device as specified by the <code>type</code> parameter. The possible values for <code>type</code> are: <code>"alarm"</code> , <code>"music"</code> , <code>"notification"</code> , <code>"ring"</code> , <code>"voicecall"</code> and  <code>"system"</code>. Note that if the value of <code>index</code> parameter is not between the minimum and maximum audio indices  of the device, the intended outcome may not be achieved. The minimum and maximum indices can be requested by calling the above function. </p>
 
@@ -73,7 +73,7 @@
 ```
 <p style = "text-align: justify">Call to  <code>_setAudioVolume()</code> sets the audio index of the music stream to 7 for successful requests or a promise rejection if something goes wrong.</p>
 
-#### silence(): 
+#### &#x1F537; silence(): 
 
 <p style = "text-align: justify"> is used to set the ringer mode of the device to silent with no vibration. </p>
 
@@ -94,7 +94,7 @@
 ```
 <p style = "text-align: justify">Call to  <code>_silenceRinger()</code> sets the ringer mode of the device to silent with no vibration for successful requests or a promise rejection if something goes wrong.</p>
 
-#### vibrate(): 
+#### &#x1F537; vibrate(): 
 
 <p style = "text-align: justify"> is used to set the ringer mode of the device to a mode that will be silent and will vibrate. </p>
 
@@ -115,7 +115,7 @@
 ```
 <p style = "text-align: justify">Call to  <code>_vibrateRinger()</code> sets the ringer mode of the device to silent but with vibration for successful requests or a promise rejection if something goes wrong.</p>
 
-#### normalize(): 
+#### &#x1F537; normalize(): 
 
 <p style = "text-align: justify"> is used to set the ringer mode of the device to a mode that may be audible and may vibrate. It will be audible if the volume before changing out of this mode was audible. It will vibrate if the vibrate setting is on. </p>
 

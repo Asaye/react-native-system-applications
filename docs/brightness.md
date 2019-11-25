@@ -22,7 +22,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### index(): 
+#### &#x1F537; index(): 
 
 <p style = "text-align: justify">is used to get the current brightness index of the screen.</p>
 
@@ -50,7 +50,7 @@
         }
 ```
 
-#### indexTo(int index): 
+#### &#x1F537; indexTo(int index): 
 <p style = "text-align: justify">is used to set the brightness index of the device to an index spacified by <code>index</code> parameter. The value of <code>index</code> parameter should be between between 0 and 255 inclusive. If not, a promise rejection will be sent.</p>
 
 ##### Sample code snippet

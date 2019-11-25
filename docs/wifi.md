@@ -22,7 +22,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### enable(): 
+#### &#x1F537; enable(): 
 
 <p style = "text-align: justify">is used to turn on the wifi state of the device.</p>
 
@@ -44,7 +44,7 @@
 
 <p style = "text-align: justify">Call to  <code>_turnOnWifi()</code> will turn on the wifi state of the device for successful requests or will result in a promise rejection if something goes wrong.</p>
 
-#### disable(): 
+#### &#x1F537; disable(): 
 
 <p style = "text-align: justify">is used to turn off the wifi state of the device.</p>
 
@@ -66,7 +66,7 @@
 
 <p style = "text-align: justify">After the  <code>_turnOffWifi()</code> function is called, the wifi state of the device will be turned off for successful requests or a promise rejection will be sent if something goes wrong.</p>
 
-#### isEnabled(): 
+#### &#x1F537; isEnabled(): 
 
 <p style = "text-align: justify">is used to obtain the current wifi state of the device, i.e., whether the wifi state is enabled or disabled.</p>
 

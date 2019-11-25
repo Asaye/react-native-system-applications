@@ -17,7 +17,7 @@
 ### Description
 <p style = "text-align: justify">The above function is used to perform the following activities.</p>
 
-#### send(String number, String message): 
+#### &#x1F537; send(String number, String message): 
 
 <p style = "text-align: justify">is used to send an SMS message to a phone number specified by <code>number</code> parameter having a content specified by <code>message</code> parameter.</p>
 

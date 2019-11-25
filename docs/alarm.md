@@ -63,7 +63,7 @@ The response data sent via the event emitter is the string representation of the
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### schedule(Object options): 
+#### &#x1F537; schedule(Object options): 
 
 <p style = "text-align: justify">is used to schedule an alarm notification. The <code>options</code> parameter can have, but not limited to, the properties shown below. </p>
 
@@ -101,7 +101,7 @@ You can also add any other key-value pairs in addition to the above so that you 
 
 <p style = "text-align: justify">Invoking the <code>_scheduleNotification()</code> function schedules an alarm to be fired on Sep 01 2019 @ 8:30:00 AM local time. When the notification is fired an event will also be emitted and the string representation of the <code>params</code> field defined within the function will be sent back as a response.</code></p>
 
-#### update(Object options): 
+#### &#x1F537; update(Object options): 
 
 <p style = "text-align: justify">is used to update a scheduled notification. All of the parameters passed to <code>schedule()</code> function except the <code>channelId</code> property can be updated. Thus, the <code>options</code> parameter passed to the <code>update()</code> function should contain the <code>channelId</code> property of an already scheduled notification and any other properties either to be modified or added.</p>
 
@@ -119,7 +119,7 @@ You can also add any other key-value pairs in addition to the above so that you 
 ```
 <p style = "text-align: justify">Invoking the <code>_updateNotif_abc123()</code> function updates a scheduled notification with <code>channelId</code> of <code>abc123</code> by changing the date when the notification will be posted to Sep 02 2019 @ 8:30:00 AM local time.</p>
 
-#### refer(String channelId): 
+#### &#x1F537; refer(String channelId): 
 
 <p style = "text-align: justify">is used to refer a scheduled notification so as to have an overview of its properties. The parameter <code>channelId</code> represents the unique identifier associated with the scheduled notification. The response is the string representation of the object parameter passed to the <code>schedule()</code> or <code>update()</code> function. For unsuccessful requests a promise rejection will be sent.</p>
 
@@ -140,7 +140,7 @@ You can also add any other key-value pairs in addition to the above so that you 
 ```
 <p style = "text-align: justify">Invoking the <code>_referScheduledNotif()</code> function obtains the data associated with a scheduled alarm notification having a <code>channelId</code> of <code>abc123</code> and logs the response.</p>
 
-#### cancel(String channelId): 
+#### &#x1F537; cancel(String channelId): 
 
 <p style = "text-align: justify">is used to cancel an alarm notification scheduled with a unique identifier of <code>channelId</code>. In addition, the data associated with the notification will be deleted.</p>
 
@@ -157,7 +157,7 @@ You can also add any other key-value pairs in addition to the above so that you 
 ```
 <p style = "text-align: justify">Invoking the <code>_cancelNotification()</code> cancels an alarm notification having a <code>channelId</code> of <code>abc123</code>.</p>
 
-#### cancelAll(): 
+#### &#x1F537; cancelAll(): 
 
 <p style = "text-align: justify">is used to cancel all the notifications scheduled via the <code>schedule()</code> function. The data corresponding to all notifications will also be deleted.</p>
 

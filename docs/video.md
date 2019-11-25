@@ -26,7 +26,7 @@
 ### Description
 <p style = "text-align: justify">The above functions are used to perform the following activities.</p>
 
-#### prepare(Object options): 
+#### &#x1F537; prepare(Object options): 
 
 > ><p style = "text-align: justify">is used to prepare a video recroding environment and display a preview. The <code>options</code> parameter can have the properties shown below. 
     
@@ -57,7 +57,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
  ```
 >>>><p style = "text-align: justify">Invoking the <code>_prepareRecordingEnv()</code> function prepares the recording environment using the front camera so that the output will be saved in <code>movies</code> folder (don't forget the last backslash). This makes the media recorder to be ready for recording and a user interface with a preview having a START/STOP button appears on the screen of the device. After this, there are two options to start recording. The first one is to call the <code>startRecording()</code> function programmatically. And the second option is to manually press the START button on the created user interface.</p>
 
-#### startRecording(): 
+#### &#x1F537; startRecording(): 
 
 > ><p style = "text-align: justify">is used to start video recroding activity. Calling this function is equivalent to pressing the START button. After calling the <code>prepare()</code> function and before calling this one, I recommend to provide at least three seconds (3000ms) gap to make sure that the recording environment is prepared and ready to record. Once the recording is started, it can be terminated by:</p>
 
@@ -86,7 +86,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 
 <p style = "text-align: justify">Invoking the <code>_startVideoRecording()</code> function starts video recording after 3000ms.</p>
 
-#### stopRecording(): 
+#### &#x1F537; stopRecording(): 
 
 <p style = "text-align: justify">is used to terminate an ongoing video recording activity. Calling this function is equivalent to pressing the STOP button. After calling this function, the media recording evnvironment is still set up and a preview will be displayed. Another session of video recording can be started by calling <code>startRecording()</code> function or by pressing the START button.</p>
 
@@ -102,7 +102,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 ```
 <p style = "text-align: justify">Invoking the <code>_stopVideoRecording()</code> function terminates an ongoing recording activity.</p>
 
-#### isRecording(): 
+#### &#x1F537; isRecording(): 
 
 <p style = "text-align: justify">is used to check whether there is an ongoing recording activity or not. This might be useful if you want to call <code>startRecording()</code> function while there is no any ongoing recording activity or to call <code>stopRecording()</code> function while there is a checked ongoing recording activity.</p>
 
@@ -124,7 +124,7 @@ All the above properties except the <code>outputFolder</code> are optional. If y
 ```
 <p style = "text-align: justify">Invoking the <code>_checkVideoRecording()</code> checks if there is an ongoing recording activity and the <code>stopRecording()</code> function is called if the response is <code>true</code>.</p>
 
-#### exitRecording(): 
+#### &#x1F537; exitRecording(): 
 
 <p style = "text-align: justify">is used to exit the recording activity. Calling this function is equivalent to pressing the back button. No further video recording session can be started after calling this funtion.</p>
 
