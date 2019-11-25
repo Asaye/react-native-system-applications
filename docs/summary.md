@@ -64,7 +64,7 @@
  ###### Exit the video recording and return to the delegating activity. 
 
  > ``` 	Video.exitRecording(); ``` 
-### &#x1F537; 
+
 ### &#x1F537; <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./image.md">Image</a>
 
  ###### Prepare a capture environment using the front camera to save the image in images folder. 
