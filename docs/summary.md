@@ -12,191 +12,194 @@
 ```  react-native link react-native-system-applications```
 
 ### Import
-```  import { Audio, Alarm, Video, Image, 
-	          Files, Sms, Volume, Wifi, Calls, 
-	          Contacts, Bluetooth, Brightness} from 'react-native-system-applications';```
+
+```  
+		import { Audio, Alarm, Video, Image, 
+	             Files, Sms, Volume, Wifi, Calls, 
+	             Contacts, Bluetooth, Brightness} from 'react-native-system-applications';  
+```
 
 ### Implement
 
 >> <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./audio.md">Audio</a>
 
->>> ###### Prepare an audio recording environment so that the output will be saved in music folder. 
+ ###### Prepare an audio recording environment so that the output will be saved in music folder. 
 
->>> > ``` Audio.prepare({ "outputFolder": "music/" }); ``` 
->>>
->>> ###### Start audio recording. 
+ > ``` Audio.prepare({ "outputFolder": "music/" }); ``` 
 
->>> > ``` 	Audio.startRecording(); ``` 
->>>
->>> ###### Stop audio recording and prepare for another recording session. 
+ ###### Start audio recording. 
 
->>> > ``` 	Audio.stopRecording(); ``` 
->>>
->>> ###### Check if there is an ongoing audio recording activity. 
+ > ``` 	Audio.startRecording(); ``` 
 
->>> > ``` 	Audio.isRecording(); ``` 
->>>
->>> ###### Exit the audio recording and return to the delegating activity. 
+ ###### Stop audio recording and prepare for another recording session. 
 
->>> > ``` 	Audio.exitRecording(); ``` 
+ > ``` 	Audio.stopRecording(); ``` 
+
+ ###### Check if there is an ongoing audio recording activity. 
+
+ > ``` 	Audio.isRecording(); ``` 
+
+ ###### Exit the audio recording and return to the delegating activity. 
+
+ > ``` 	Audio.exitRecording(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./video.md">Video</a>
 
->>> ###### Prepare a video recording environment so that the output will be saved in videos folder. 
+ ###### Prepare a video recording environment so that the output will be saved in videos folder. 
 
->>> > ``` Video.prepare({ "outputFolder": "videos/" }); ``` 
->>>
->>> ###### Start video recording. 
+ > ``` Video.prepare({ "outputFolder": "videos/" }); ``` 
 
->>> > ``` 	Video.startRecording(); ``` 
->>>
->>> ###### Stop video recording and prepare for another recording session. 
+ ###### Start video recording. 
 
->>> > ``` 	Video.stopRecording(); ``` 
->>>
->>> ###### Check if there is an ongoing video recording activity. 
+ > ``` 	Video.startRecording(); ``` 
 
->>> > ``` 	Video.isRecording(); ``` 
->>>
->>> ###### Exit the video recording and return to the delegating activity. 
+ ###### Stop video recording and prepare for another recording session. 
 
->>> > ``` 	Video.exitRecording(); ``` 
+ > ``` 	Video.stopRecording(); ``` 
+
+ ###### Check if there is an ongoing video recording activity. 
+
+ > ``` 	Video.isRecording(); ``` 
+
+ ###### Exit the video recording and return to the delegating activity. 
+
+ > ``` 	Video.exitRecording(); ``` 
 >>
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./image.md">Image</a>
 
->>> ###### Prepare a capture environment using the front camera to save the image in images folder. 
+ ###### Prepare a capture environment using the front camera to save the image in images folder. 
 
->>> > ``` Image.prepare({outputFolder: "images/", "cameraType": "FRONT"}); ``` 
+ > ``` Image.prepare({outputFolder: "images/", "cameraType": "FRONT"}); ``` 
 
->>> ###### Take pictures. 
+ ###### Take pictures. 
 
->>> > ``` Image.capture(); ``` 
->>>
->>> ###### Exit image capturing activity. 
+ > ``` Image.capture(); ``` 
 
->>> > ``` Image.exitCapture(); ``` 
+ ###### Exit image capturing activity. 
+
+ > ``` Image.exitCapture(); ``` 
 > >
 > > <a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./contacts.md">Contacts</a>
 
->>> ###### Obtain a user picked contact. 
+ ###### Obtain a user picked contact. 
 
->>> > ``` Contacts.pick(); ``` 
+ > ``` Contacts.pick(); ``` 
 
->>> ###### Obtain all contacts. 
+ ###### Obtain all contacts. 
 
->>> > ``` Contacts.getAll(); ``` 
->>
+ > ``` Contacts.getAll(); ``` 
+
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./calls.md">Calls</a>
 
->>> ###### Call phone number +123-456-7890. 
+ ###### Call phone number +123-456-7890. 
 
->>> > ``` Calls.call("+123-456-7890"); ``` 
+ > ``` Calls.call("+123-456-7890"); ``` 
 
->>> ###### Obtain up to 500 call logs. 
+ ###### Obtain up to 500 call logs. 
 
->>> > ``` Calls.getLog(); ``` 
->>
+ > ``` Calls.getLog(); ``` 
+
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./files.md">Files</a>
 
->>> ###### Open a file from Images folder. 
+ ###### Open a file from Images folder. 
 
->>> > ``` Files.open("Images/myPic.jpg"); ``` 
+ > ``` Files.open("Images/myPic.jpg"); ``` 
 
->>> ###### Get absolute path of a file from file picker. 
+ ###### Get absolute path of a file from file picker. 
 
->>> > ``` Files.getPath(); ``` 
+ > ``` Files.getPath(); ``` 
 >
->>> ###### Open a file from file picker. 
+ ###### Open a file from file picker. 
 
->>> > ``` Files.pick(); ``` 
+ > ``` Files.pick(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./sms.md">Sms</a>
->>
->>> ###### Send "Hi there" message to phone number +012-345-6789. 
 
->>> > ``` Sms.send("+012-345-6789", "Hi there"); ``` 
+ ###### Send "Hi there" message to phone number +012-345-6789. 
+
+ > ``` Sms.send("+012-345-6789", "Hi there"); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./volume.md"> Volume</a>
 
->>> ###### Get the volume index of the system stream. 
+ ###### Get the volume index of the system stream. 
 
->>> > ``` Volume.indexOf("system"); ``` 
+ > ``` Volume.indexOf("system"); ``` 
 
->>> ###### Set the volume index of alarm to 10. 
+ ###### Set the volume index of alarm to 10. 
 
->>> > ``` Volume.indexTo("alarm", 10); ``` 
+ > ``` Volume.indexTo("alarm", 10); ``` 
 
->>> ###### Change ringer mode to silent. 
+ ###### Change ringer mode to silent. 
 
->>> > ``` Volume.silence(); ``` 
+ > ``` Volume.silence(); ``` 
 
->>> ###### Change ringer mode to normal. 
+ ###### Change ringer mode to normal. 
 
->>> > ``` Volume.normalize(); ``` 
+ > ``` Volume.normalize(); ``` 
 >
->>> ###### Change ringer mode to vibrate. 
+ ###### Change ringer mode to vibrate. 
 
->>> > ``` Volume.vibrate(); ``` 
+ > ``` Volume.vibrate(); ``` 
 
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./bluetooth.md">Bluetooth</a>
 
->>> ###### Get the status of bluetooth on the device. 
+ ###### Get the status of bluetooth on the device. 
 
->>> > ``` Bluetooth.isEnabled(); ``` 
+ > ``` Bluetooth.isEnabled(); ``` 
 
->>> ###### Enable bluetooth. 
+ ###### Enable bluetooth. 
 
->>> > ``` Bluetooth.enable(); ``` 
+ > ``` Bluetooth.enable(); ``` 
 >
->>> ###### Disable bluetooth. 
+ ###### Disable bluetooth. 
 
->>> > ``` Bluetooth.disable(); ``` 
->>
+ > ``` Bluetooth.disable(); ``` 
+
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./wifi.md"> Wifi</a>
 
->>> ###### Get the status of wifi on the device. 
+ ###### Get the status of wifi on the device. 
 
->>> > ``` Wifi.isEnabled(); ``` 
+ > ``` Wifi.isEnabled(); ``` 
 
->>> ###### Enable wifi. 
+ ###### Enable wifi. 
 
->>> > ``` Wifi.enable(); ``` 
+ > ``` Wifi.enable(); ``` 
 >
->>> ###### Disable wifi. 
+ ###### Disable wifi. 
 
->>> > ``` Wifi.disable(); ``` 
->>
+ > ``` Wifi.disable(); ``` 
+
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./brightness.md">Brightness</a>
 
->>> ###### Obtain the index of system brightness. 
+ ###### Obtain the index of system brightness. 
 
->>> > ``` Brightness.index(); ``` 
+ > ``` Brightness.index(); ``` 
 
->>> ###### Set system brightness to 100. 
+ ###### Set system brightness to 100. 
 
->>> > ``` Brightness.indexTo(100); ``` 
->>
+ > ``` Brightness.indexTo(100); ``` 
+
 >><a style = "color:#4285F4;font-size:20px;font-weight:bold" href = "./alarm.md"> Alarm</a>
 
->>> ###### Schedule a notification to be posted after one minute. 
+ ###### Schedule a notification to be posted after one minute. 
 
->>> > ``` Alarm.schedule({ "channelId": "abc123", "date": (new Date()).getTime() + 60000 }); ``` 
+ > ``` Alarm.schedule({ "channelId": "abc123", "date": (new Date()).getTime() + 60000 }); ``` 
 
->>> ###### Add title to a scheduled notification having channedId of abc123. 
+ ###### Add title to a scheduled notification having channedId of abc123. 
 
->>> > ``` Alarm.update({"channelId": "abc123", "title": "myTitle"}); ``` 
->>>
->>> ###### Have an overview of a scheduled notification. 
+ > ``` Alarm.update({"channelId": "abc123", "title": "myTitle"}); ``` 
 
->>> > ``` Alarm.refer("abc123"); ``` 
+ ###### Have an overview of a scheduled notification. 
 
->>> ###### Cancel an alarm notification with channelId of abc123. 
+ > ``` Alarm.refer("abc123"); ``` 
 
->>> > ``` Alarm.cancel("abc123"); ``` 
->>>
->>> ###### Cancel all notifications. 
+ ###### Cancel an alarm notification with channelId of abc123. 
 
->>> > ``` Alarm.cancelAll(); ``` 
+ > ``` Alarm.cancel("abc123"); ``` 
+
+ ###### Cancel all notifications. 
+
+ > ``` Alarm.cancelAll(); ``` 
 
 
 ​			 
