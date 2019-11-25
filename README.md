@@ -74,15 +74,14 @@ If the automatic linking fails for some reason, you can do the linking manually 
 
 
 ### Usage
-The module is simple to use. Just import the component that you want to work with and invoke the methods. For instance, the 
-<code>Files</code> component is imported like so:
+The module is simple to use. Just import the component that you want to work with and invoke the available functions for that component. For instance, the <code>Files</code> component is imported like so:
 
 ```   import { Files } from 'react-native-system-applications';```
 
 Then, if you want to pick a file with a file picker, you can invoke the <code>pick()</code> function on the 
 <code>Files</code> object as follows:
 
-```    Files.pick()    ```
+```    Files.pick();    ```
 
 For versions below 2.0.0, you can achieve the same outcome as above using:
 
