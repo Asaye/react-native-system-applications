@@ -14,13 +14,13 @@
 
 <p style = "text-align: justify">To perform these tasks, the module offers the following twelve components.</p>
 
-<table>
-<tr><td>[Audio](./docs/audio.md)</td><td>[Video](./docs/video.md)</td><td>[Image](./docs/image.md)</td></tr>
-<tr><td>[Contacts](./docs/contacts.md)</td><td>[Calls](./docs/calls.md)</td><td>[Files](./docs/files.md)</td></tr>
-<tr><td>[Sms](./docs/sms.md)</td><td>[Volume](./docs/volume.md)</td><td>[Bluetooth](./docs/bluetooth.md)</td></tr>
-<tr><td>[Wifi](./docs/wifi.md)</td><td>[Brightness](./docs/brightness.md)</td><td>[Alarm](./docs/alarm.md)</td></tr>
-</table>
-
+   Media | Device | Settings | Phone
+   :---------------:| :------------:| :----------------: | :---------------:
+   [Audio](./docs/audio.md)      | [Files](./docs/files.md) | [Bluetooth](./docs/bluetooth.md) | [Contacts](./docs/contacts.md)
+   [Video](./docs/video.md)      | [Alarm](./docs/alarm.md)  | [Wifi](./docs/wifi.md) | [Calls](./docs/calls.md)
+   [Image](./docs/image.md)      | [Brightness](./docs/brightness.md) | [Volume](./docs/volume.md)   |  [Sms](./docs/sms.md) 
+ 
+  
 The links to the above sub-modules (we call them modules from now on) leads to the documentation for each module. The documentation contains detailed information about the usage and required configurations of each module. If you find going through all the documentation is time consuming, you can also find a brief summary in just one page [here](./docs/summary.md).
 
 # Getting Started
