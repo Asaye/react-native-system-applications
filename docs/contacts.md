@@ -1,5 +1,5 @@
 # Contacts
-<p style = "text-align: justify">This module is used to obtain list of all contacts or a user picked contact from the device. The module is accessed by calling the contacts module via <code>Sysapps.contacts</code>.</p> 
+<p style = "text-align: justify">This module is used to obtain list of all contacts or a user picked contact from the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The contacts module contains the following functions.</p>

@@ -1,5 +1,5 @@
 # Sms
-<p style = "text-align: justify">This module is used to send an SMS message to a specific phone number. The module is accessed by calling the sms module via <code>Sysapps.sms</code>.</p> 
+<p style = "text-align: justify">This module is used to send an SMS message to a specific phone number.</p> 
 
 ## Functions
 <p style = "text-align: justify">The sms module contains the following function.</p>

@@ -1,5 +1,5 @@
 # Video
-<p style = "text-align: justify">This module is used to record video using hardwares installed on the device. The module is accessed by calling the video module via <code>Sysapps.video</code>.</p> 
+<p style = "text-align: justify">This module is used to record video using hardwares installed on the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The video module contains the following functions.</p>

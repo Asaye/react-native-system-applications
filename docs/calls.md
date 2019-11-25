@@ -1,5 +1,5 @@
 # Calls
-<p style = "text-align: justify">This module is used to call a specific phone number or to retrieve call log from the device. The module is accessed by calling the calls module via <code>Sysapps.calls</code>.</p> 
+<p style = "text-align: justify">This module is used to call a specific phone number or to retrieve call log from the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The calls module contains the following functions.</p>

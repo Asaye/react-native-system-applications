@@ -1,5 +1,5 @@
 # Volume
-<p style = "text-align: justify">This module is used to change or obtain the existing volume states of the device. The module is accessed by calling the volume module via <code>Sysapps.volume</code>.</p> 
+<p style = "text-align: justify">This module is used to change or obtain the existing volume states of the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The volume module contains the following functions.</p>

@@ -1,5 +1,5 @@
 # Image
-<p style = "text-align: justify">This module is used to capture images using hardwares installed on the device. The module is accessed by calling the image module via <code>Sysapps.image</code>.</p> 
+<p style = "text-align: justify">This module is used to capture images using hardwares installed on the device.</p> 
 
 ## Functions
 

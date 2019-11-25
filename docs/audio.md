@@ -1,5 +1,5 @@
 # Audio
-<p style = "text-align: justify">This module is used to record audio using hardwares installed on the device. The module is accessed by calling the audio module via <code>Sysapps.audio</code>.</p> 
+<p style = "text-align: justify">This module is used to record audio using hardwares installed on the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The audio module contains the following functions.</p>

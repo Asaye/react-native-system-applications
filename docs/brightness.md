@@ -1,6 +1,6 @@
  # Brightness
 
- <p style = "text-align: justify">This module is used to set or get the current brightness index of the device. The module is accessed by calling the brightness module via <code>Sysapps.brightness</code>.</p> 
+ <p style = "text-align: justify">This module is used to set or get the current brightness index of the device.</p> 
  
  ## Functions
 

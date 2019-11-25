@@ -1,5 +1,5 @@
 # Wifi
-<p style = "text-align: justify">This module is used to change or obtain the current wifi state of the device. The module is accessed by calling the wifi module via <code>Sysapps.wifi</code>.</p> 
+<p style = "text-align: justify">This module is used to change or obtain the current wifi state of the device.</p> 
 
 ## Functions
 <p style = "text-align: justify">The wifi module contains the following functions.</p>

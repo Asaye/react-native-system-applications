@@ -1,5 +1,5 @@
 # Alarm
-<p style = "text-align: justify">This module is used to schedule and manage alarm notifications. The module is accessed by calling the alarm module via <code>Sysapps.alarm</code>.</p> 
+<p style = "text-align: justify">This module is used to schedule and manage alarm notifications.</p> 
 
 ## Functions
 <p style = "text-align: justify">The alarm module contains the following functions.</p>

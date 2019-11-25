@@ -1,5 +1,5 @@
 # Files
-<p style = "text-align: justify">This module is used to open any file from the device for a given file path and to open a file picker dialog so that the user can pick any file from the device. The module is accessed by calling the files module via <code>Sysapps.files</code>.</p>
+<p style = "text-align: justify">This module is used to open any file from the device for a given file path and to open a file picker dialog so that the user can pick any file from the device.</p>
 
 ## Functions
 

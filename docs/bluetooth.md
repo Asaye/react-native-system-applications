@@ -1,6 +1,6 @@
 # Bluetooth
 
-<p style = "text-align: justify">This module is used to change or obtain the current bluetooth state of the device. The module is accessed by calling the bluetooth module via <code>Sysapps.bluetooth</code>.</p>
+<p style = "text-align: justify">This module is used to change or obtain the current bluetooth state of the device.</p>
 
 ## Functions
 
